@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev:cart": "pnpm --filter cart dev",
-    "dev:api": "pnpm --filter ecommerce-api dev",
+    "dev:api": "pnpm --filter cart-api dev",
     "dev": "pnpm --parallel --filter cart --filter ecommerce-api dev"
   }
 }
