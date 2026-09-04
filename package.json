@@ -1,0 +1,10 @@
+{
+  "name": "engineering-lab",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:cart": "pnpm --filter cart dev",
+    "dev:api": "pnpm --filter ecommerce-api dev",
+    "dev": "pnpm --parallel --filter cart --filter ecommerce-api dev"
+  }
+}
