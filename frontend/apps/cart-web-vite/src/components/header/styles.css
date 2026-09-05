@@ -1,0 +1,27 @@
+.header {
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 0 15px;
+    height: 80px;
+}
+
+.mini-cart-wrapper {
+    position: relative;
+    height: 100%;
+    display: flex;
+}
+
+.mini-cart-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: -15px;
+    width: 400px;
+}
+
+.cart-buttom:hover + .mini-cart-dropdown,
+.mini-cart-dropdown:hover {
+    display: block;
+}
