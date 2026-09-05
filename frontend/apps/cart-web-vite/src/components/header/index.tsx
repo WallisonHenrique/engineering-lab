@@ -16,16 +16,16 @@ function Header() {
     const {count, list} = CART.reduce<{
         count: number
         list: React.ReactElement[]
-    }>((acc, item) => {
+    }>((acc, current) => {
         const cartItem = (
             <CartItem
-                product={item}
+                product={current}
                 onClick={handleEditCart}
             />
         )
 
         return {
-            count: acc.count + item.qtd,
+            count: acc.count + current.qtd,
             list: [...acc.list, cartItem]
         }
     }, {count: 0, list: []})
