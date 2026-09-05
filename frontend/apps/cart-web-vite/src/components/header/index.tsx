@@ -2,6 +2,7 @@ import CartButtom from '../cart-buttom';
 import CartItem from '../cart-item';
 import MiniCart from '../mini-cart';
 import './styles.css';
+import Menu from '../menu';
 
 const PHOTO = "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR1ieevip1Dtt_koA21ZPais5TCTphFsAS8s_Qd0ETjE1D2FZeWWqRS5sqiFM3rzF7U40RvrluU2V3-w7yn1rUfDyi0hBwAB-NgLwwKRkrL2IGolPz8uNqVKg"
 const CART = [
@@ -32,6 +33,7 @@ function Header() {
 
     return (
         <header className='header'>
+            <Menu />
             <div className='mini-cart-wrapper'>
                 <CartButtom>{count}</CartButtom>
                 <div className='mini-cart-dropdown'>
