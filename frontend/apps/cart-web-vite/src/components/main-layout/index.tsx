@@ -1,4 +1,5 @@
 import Header from "../header"
+import "./styles.css"
 
 function MainLayout({...props}) {
     return (
