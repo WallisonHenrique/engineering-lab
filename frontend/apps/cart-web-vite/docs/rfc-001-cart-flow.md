@@ -75,6 +75,7 @@ Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para 
     * Início (/produtos)
     * Carrinho (/carrinho)
   * MiniCart (Feature)
+    * useProduct (Busca/carrega o ProductType com base no id na constante CART)
     * useCart (Consumir items, totalPrice, updateItem e removeItem do Context Cart)
     * Title
     * Cart
@@ -157,7 +158,11 @@ export interface CartContextType {
   addItem: (item: CartItemType) => void;
   updateItem: (id: string, quantity: number) => void;
   removeItem: (id: string) => void;
+  getItem: (id: string) => CartItemType | undefined;
 }
+export type UseProduct = (id: string) => {
+  product: ProductType | null;
+};
 ```
 
 ## 4. Riscos & Negativos (Trade-offs)
