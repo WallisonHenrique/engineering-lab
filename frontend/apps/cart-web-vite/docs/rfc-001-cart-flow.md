@@ -33,6 +33,9 @@ Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para 
 
 ## 2. Solução Proposta
 
+### Wireframe & Design
+<img width="743" height="476" alt="image" src="https://github.com/user-attachments/assets/ed8efdee-30ce-45b5-b686-b02ae853d09a" />
+
 ### Fluxo & Regras de Negócio
 ```text
 [0. Header] (Layout Principal)
