@@ -10,7 +10,7 @@
 ## 1. Problema & Contexto
 
 ### O Problema
-Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para **validar diferentes estratégias de gerenciamento de estado**. Essa estrutura posteriormente será utilizada como base de outros experimentos.
+Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para **experimentar diferentes estratégias de gerenciamento de estado e seus tradeoffs**.
 
 ### Escopo (In / Out)
 * **In-Scope (O que entra):**
@@ -62,8 +62,8 @@ Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para 
 └── Clique no "-" quando valor "1" no Seletor [- 1 +] ──> Remove Item do Estado Global [Cart]
 ```
 ### Decisões Técnicas & Justificativas
-* **TanStack Router em vez de React Router:** Adotado para validar a DX de rotas tipadas (type-safe routes) e o carregamento de dados integrado.
-* **Context API para Estado do Carrinho:** Opção por uma solução nativa para manter a PoC leve, aceitando o risco de re-renders locais em troca de zero dependências externas de gerenciamento de estado.
+* **TanStack Router em vez de React Router:** Adotado para ganhar familiaridade com a ferramenta, validar a DX de rotas tipadas (type-safe routes) e o carregamento de dados integrado.
+* **Context API para Estado do Carrinho:** Opção por uma solução nativa para manter a PoC leve, aceitando o risco de re-renders locais em troca de zero dependências externas de gerenciamento de estado. Os re-renders desnecessário ocorrerão somente no `<ProductDetails>` e podem ser disparado quando manipular o `CartContext` no `<MiniCart>`. Isso acontece porque  `<ProductDetails>` é o único que não consome o `items` diretamente ou por meio de estados calculados.
 * **Composição de UI (Compound Components):** Utilizada em `<CartItem>` e `<AddProductActions>` para permitir o reuso do mesmo componente no (`MiniCart`) e na rota principal (`/carrinho`).
   
 ## 3. Especificação Técnica & Contratos
@@ -74,6 +74,8 @@ Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para 
   * Menu
     * Início (/produtos)
     * Carrinho (/carrinho)
+  * MiniCart-Btn
+    * useCart (Consumir totalItems do Context API)
   * MiniCart (Feature)
     * useProduct (Busca/carrega o ProductType com base no id na constante CART)
     * useCart (Consumir items, totalPrice, updateItem e removeItem do Context Cart)
@@ -154,6 +156,7 @@ export interface CartItemType extends ProductType {
 }
 export interface CartContextType {
   items: CartItemType[];
+  totalItems: number;
   totalPrice: number;
   addItem: (item: CartItemType) => void;
   updateItem: (id: string, quantity: number) => void;
@@ -179,7 +182,7 @@ O foco dessa PoC é reproduzir o fluxo mínimo do carrinho e seu gerenciamento d
 ### Pontos de Atenção
 
 * TankStack Router: Aumento da complexidade de implementação devido a ser uma ferramenta nova para mim.
-* Context API: Risco de impacto no desempenho devido as renderizações desnecessárias.
+* Context API: Risco de impacto no desempenho do `ProductDetails`.
 
 ### Alternativas Descartadas
 
