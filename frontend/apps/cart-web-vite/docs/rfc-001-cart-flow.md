@@ -132,40 +132,63 @@ export interface BaseComponentProps {
   className?: string;
   children?: React.ReactNode;
 }
+
 export interface ProductImageProps extends BaseComponentProps {
   src: string;
   alt: string;
 }
+
 export interface AddProductQuantityProps extends BaseComponentProps {
   value: number;
   min?: number; // default 1
   max?: number; // default 99
   onChange: (value: number) => void;
 }
+
 export interface ProductDetailsProps {
   id: string;
 }
-export interface ProductType {
+
+export interface ProductModel {
   id: string;
   image: string;
   title: string;
   price: number;
 }
-export interface CartItemType extends ProductType {
+
+export interface UseProductDetailsProps {
+  id: string;
+}
+
+export interface UseProductDetailsResult {
+  ProductModel | null
+};
+
+export interface CartItemModel extends ProductModel {
   quantity: number;
 }
-export interface CartContextType {
-  items: CartItemType[];
+
+export type CartAction =
+  | { type: "add", item: CartItemModel }
+  | { type: "update", item: { id: string, quantity: number } }
+  | { type: "remove", item: { id: string } };
+
+export interface CartState {
+  items: CartItemModel[];
+}
+
+export interface CartStateContextValue extends CartState {
   totalItems: number;
   totalPrice: number;
-  addItem: (item: CartItemType) => void;
-  updateItem: (id: string, quantity: number) => void;
-  removeItem: (id: string) => void;
-  getItem: (id: string) => CartItemType | undefined;
 }
-export type UseProduct = (id: string) => {
-  product: ProductType | null;
-};
+
+export interface CartDispatchContextValue {
+  dispatch: React.Dispatch<CartAction>;
+}
+
+export interface UseCartStateResult extends CartStateContextValue {
+  getItem: (id: string) => CartItemModel | undefined;
+}
 ```
 
 ## 4. Riscos & Negativos (Trade-offs)
