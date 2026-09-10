@@ -160,9 +160,7 @@ export interface UseProductDetailsProps {
   id: string;
 }
 
-export interface UseProductDetailsResult {
-  ProductModel | null
-};
+export type UseProductDetailsResult = ProductModel | null;
 
 export interface CartItemModel extends ProductModel {
   quantity: number;
