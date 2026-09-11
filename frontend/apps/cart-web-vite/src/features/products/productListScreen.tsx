@@ -1,11 +1,8 @@
 import { Link } from "@tanstack/react-router"
-import Product from "../../components/product/product"
-import ProductImage from "../../components/product/product-image"
-import ProductName from "../../components/product/product-name"
-import ProductPrice from "../../components/product/product-price"
 import "./productListScreen.css"
 import { CART } from "../../utils/constants"
 import { toCurrency } from "../../utils/helpers"
+import { ProductCard } from "@/components/ProductCard"
 
 function ProductListScreen() {
     const list = CART.map(item => (
@@ -14,11 +11,11 @@ function ProductListScreen() {
             to="/produto/$id" 
             params={{ id: String(item.id) }}
         >
-            <Product>
-                <ProductImage url={item.photo} alt={item.name} />
-                <ProductName name={item.name} />
-                <ProductPrice price={toCurrency(item.price)} />
-            </Product>
+            <ProductCard>
+                <ProductCard.Image url={item.photo} alt={item.name} />
+                <ProductCard.Name name={item.name} />
+                <ProductCard.Price price={toCurrency(item.price)} />
+            </ProductCard>
         </Link>
     ))
 

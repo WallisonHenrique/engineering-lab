@@ -1,7 +1,4 @@
-import Product from "../../components/product/product"
-import ProductImage from "../../components/product/product-image"
-import ProductName from "../../components/product/product-name"
-import ProductPrice from "../../components/product/product-price"
+import { ProductCard } from "@/components/ProductCard";
 import NumberField from "../../components/NumberField"
 import "./productDetailScreen.css"
 import useProductDetailScreen from "./useProductDetailScreen"
@@ -22,11 +19,11 @@ function ProductDetailScreen({ id }: Props) {
 
     return (
         <div className="product-details">
-            <Product>
-                <ProductImage url={product.photo} alt={product.name} />
-                <ProductName name={product.name} />
-                <ProductPrice price={product.price} />
-            </Product>
+            <ProductCard>
+                <ProductCard.Image url={product.photo} alt={product.name} />
+                <ProductCard.Name name={product.name} />
+                <ProductCard.Price price={product.price} />
+            </ProductCard>
             <div className="product-add">
                 <NumberField 
                     value={product.quantity} 
