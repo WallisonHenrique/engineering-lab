@@ -1,0 +1,17 @@
+.product-add {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.product-add-btn {
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.product-priceTotal {
+    display: inline-block;
+    text-align: left;
+    width: 90px;
+}
