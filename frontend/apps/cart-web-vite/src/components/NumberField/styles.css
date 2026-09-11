@@ -1,0 +1,19 @@
+.number-field {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.number-field-input {
+    outline: none;
+    text-align: center;
+    width: 20px;
+}
+
+.number-field-controls {
+    cursor: pointer;
+}
+
+.number-field-controls[disabled] {
+    cursor: default;
+}
