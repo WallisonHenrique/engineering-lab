@@ -63,7 +63,8 @@ Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para 
 ```
 ### Decisões Técnicas & Justificativas
 * **TanStack Router em vez de React Router:** Adotado para ganhar familiaridade com a ferramenta, validar a DX de rotas tipadas (type-safe routes) e o carregamento de dados integrado.
-* **Context API para Estado do Carrinho:** Opção por uma solução nativa para manter a PoC leve, aceitando o risco de re-renders locais em troca de zero dependências externas de gerenciamento de estado. Os re-renders desnecessário ocorrerão somente no `<ProductDetails>` e podem ser disparado quando manipular o `CartContext` no `<MiniCart>`. Isso acontece porque  `<ProductDetails>` é o único que não consome o `items` diretamente ou por meio de estados calculados.
+* **Context API para Estado do Carrinho:** Optei por Context API por ser uma solução mais simples e atender as necessidades atuais, conforme exemplifico abaixo.
+  *  Somente o componente `ProductDetails` que usará o método `getItem` re-renderizar desnecessariamente quando o valor de `items` do `CartStateContextValue` for alterado.
 * **Composição de UI (Compound Components):** Utilizada em `<CartItem>` e `<AddProductActions>` para permitir o reuso do mesmo componente no (`MiniCart`) e na rota principal (`/carrinho`).
   
 ## 3. Especificação Técnica & Contratos
@@ -74,57 +75,64 @@ Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para 
   * Menu
     * Início (/produtos)
     * Carrinho (/carrinho)
+   
   * MiniCart-Btn
     * useCart (Consumir totalItems do Context API)
+   
   * MiniCart (Feature)
     * useProduct (Busca/carrega o ProductType com base no id na constante CART)
     * useCart (Consumir items, totalPrice, updateItem e removeItem do Context Cart)
     * Title
-    * Cart
-      * Cart.Item
-        * Product
-          * Product.Image
-          * Product.Title
-          * Product.Price
-        * AddProductActions
-          * AddProductQuantity
-      * Cart.Resume
-        * TotalPrice
-        * ViewCartBtn
-
+    * MiniCart.Items
+      * MiniCart.Item
+        * ProductCard
+          * ProductCard.Image
+          * ProductCard.Title
+          * ProductCard.Price
+          * QuantityControl
+    * MiniCart.Summary
+      * ViewTotalPrice
+	    * TotalPrice
+	    * ViewCartBtn
+        
 * ProductList (Página)
   * Title
-  * Product (Envolvido por Link e UL)
-    * Product.Image
-    * Product.Title
-    * Product.Price
+  * ProductCard (Envolvido por Link e UL)
+    * ProductCard.Image
+    * ProductCard.Title
+    * ProductCard.Price
 
-* ProductDetails (Página)
+* ProductDetail (Página)
   * useCart (Consumir getCartItem do Contexto Cart)
   * Title
-  * Product
-    * Product.Image
-    * Product.Title
-    * Product.Price
-  * AddProductActions
-    * AddProductQuantity
-    * AddProductBtn
+  * ProductDetail.Item
+    * ProductCard
+	  * ProductCard.Image
+	  * ProductCard.Title
+	  * ProductCard.Price
+  * ProductDetail.Summary
+  	* AddToCart
+      * QuantityControl
+      * AddToCartBtn
+        * TotalPrice
+	* ViewTotalPrice
       * TotalPrice
-
-* CartScreen (Página)
+      * ViewCartBtn
+   
+* Cart (Página)
   * useCart (Consumir items, totalPrice, updateItem e removeItem do Context Cart)
   * Title
-  * Cart
+  * Cart.Items
     * Cart.Item
-      * Product
-        * Product.Image
-        * Product.Title
-        * Product.Price
-      * AddProductActions
-        * AddProductQuantity
-    * Cart.Resume
-      * TotalPrice
-	  
+      * ProductCard
+        * ProductCard.Image
+	    * ProductCard.Title
+	    * ProductCard.Price
+	    * QuantityControl
+    * Cart.Summary
+      * ViewTotalPrice
+        * TotalPrice
+
 ### Contratos de Props, Interfaces de Estado ou Payloads da API
 
 ```typescript
@@ -167,9 +175,9 @@ export interface CartItemModel extends ProductModel {
 }
 
 export type CartAction =
-  | { type: "add", item: CartItemModel }
-  | { type: "update", item: { id: string, quantity: number } }
-  | { type: "remove", item: { id: string } };
+  | { type: "ADD_ITEM", item: CartItemModel }
+  | { type: "CHANGE_QUANTITY", item: { id: string, quantity: number } }
+  | { type: "REMOVE_ITEM", item: { id: string } };
 
 export interface CartState {
   items: CartItemModel[];
