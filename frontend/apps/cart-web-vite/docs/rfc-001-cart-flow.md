@@ -47,7 +47,7 @@ Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para 
 └── Clique no Card do Produto ──> Navega para [2. Detalhes do Produto]
 
 [2. Detalhes do Produto] (/produtos/:id)
-├── Clique no Botão "Adicionar" ──> Adiciona Item no Estado Global [Carrinho] e muda Texto para "Ver Carrinho"
+├── Clique no Botão "Adicionar" ──> Adiciona Item no Estado Global [Carrinho] e muda Seletor [- 1 +] e Botão "Adicionar" para "Preço Total" e Botão "Ver Carrinho"
 ├── Clique no Botão "Ver Carrinho" ──> Navega para [4. Carrinho]
 └── Clique no Seletor [- 1 +] ──> Atualiza quantidade no Estado Local [Produto]
 
@@ -63,9 +63,8 @@ Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para 
 ```
 ### Decisões Técnicas & Justificativas
 * **TanStack Router em vez de React Router:** Adotado para ganhar familiaridade com a ferramenta, validar a DX de rotas tipadas (type-safe routes) e o carregamento de dados integrado.
-* **Context API para Estado do Carrinho:** Optei por Context API por ser uma solução mais simples e atender as necessidades atuais, conforme exemplifico abaixo.
-  *  Somente o componente `ProductDetails` que usará o método `getItem` re-renderizar desnecessariamente quando o valor de `items` do `CartStateContextValue` for alterado.
-* **Composição de UI (Compound Components):** Utilizada em `<CartItem>` e `<AddProductActions>` para permitir o reuso do mesmo componente no (`MiniCart`) e na rota principal (`/carrinho`).
+* **Context API para o Estado do Carrinho:** Optei pela Context API por ser uma solução nativa, simples e suficiente para as necessidades atuais. Mapeei as re-renderizações entre os consumidores do estado — por exemplo, alterações em `items` realizadas pelo `MiniCart` podem re-renderizar `Header`, `ProductDetail` e `Cart`, enquanto alterações realizadas pelo `Cart` podem re-renderizar `Header` e `MiniCart`. Esse comportamento é esperado, mas pode ser evitado com soluções que suportem seletores. Neste momento, o impacto não justifica essa complexidade. **Como otimização pontual**, `React.memo` poderá ser aplicado aos componentes `Item` caso seja identificado impacto relevante de performance.
+* **Composição de UI (Compound Components):** Utilizada em `<CartItem>` e `<AddProductActions>` para permitir o reuso do mesmo componente no (`MiniCart`) e na rota principal (`/carrinho`). Também, avaliar impacto no desempenho durante o desenvolvimento.
   
 ## 3. Especificação Técnica & Contratos
 
@@ -211,7 +210,7 @@ O foco dessa PoC é reproduzir o fluxo mínimo do carrinho e seu gerenciamento d
 ### Pontos de Atenção
 
 * TankStack Router: Aumento da complexidade de implementação devido a ser uma ferramenta nova para mim.
-* Context API: Risco de impacto no desempenho do `ProductDetails`.
+* Context API: Risco de impacto no desempenho nos componente `Header`, `MiniCart`, `ProductDetails` e `Cart` devido as re-renderizações dos consumidores decorrentes de alterações em `items`.
 
 ### Alternativas Descartadas
 
