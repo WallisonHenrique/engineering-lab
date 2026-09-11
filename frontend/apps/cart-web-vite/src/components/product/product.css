@@ -1,0 +1,15 @@
+.product {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 20px;
+}
+
+.large .product-image {
+    width: 100px;
+    height: 100px;
+}
+
+.large .product-name {
+    width: 150px;
+}
