@@ -10,16 +10,17 @@ export function ProductListScreen() {
 
     return (
         <div className="product-list">
-            { products.map(item => (
+            { products.map(i => (
                 <Link
+                    key={i.id}
                     className="product-item"
                     to="/produto/$id" 
-                    params={{ id: String(item.id) }}
+                    params={{ id: String(i.id) }}
                 >
                     <ProductCard>
-                        <ProductCard.Image url={item.image} alt={item.name} />
-                        <ProductCard.Name name={item.name} />
-                        <ProductCard.Price price={item.price} />
+                        <ProductCard.Image url={i.image} alt={i.name} />
+                        <ProductCard.Name name={i.name} />
+                        <ProductCard.Price price={i.price} />
                     </ProductCard>
                 </Link>
             ))}

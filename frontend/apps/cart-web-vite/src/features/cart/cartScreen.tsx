@@ -43,8 +43,8 @@ function CartItem({ item }: { item: CartItemModel }) {
 export function CartScreen() {
     const cart = useCart()
     
-    const items = cart.items.map ((item) => 
-        <CartItem item={item} />
+    const items = cart.items.map ((i) => 
+        <CartItem key={i.id} item={i} />
     )
 
     return (

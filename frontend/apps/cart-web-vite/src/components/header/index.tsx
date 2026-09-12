@@ -18,7 +18,7 @@ function Header() {
                 <CartButtom>{cart.totalItems}</CartButtom>
                 <div className='mini-cart-dropdown'>
                     <MiniCart>{cart.items.map(i => (
-                        <CartItem product={i} />
+                        <CartItem key={i.id} product={i} />
                     ))}
                     <div className="mini-cart__view-cart">
                         <div className="mini-cart__total-price">
