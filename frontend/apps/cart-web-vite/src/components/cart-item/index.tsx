@@ -8,7 +8,7 @@ interface Props {
         price: number
         quantity: number
     }
-    onClick: (action: string, id: string) => void
+    onClick: ({ id, value}: { id: string, value: number}) => void
 }
 
 function CartItem({product, onClick}: Props) {
@@ -26,7 +26,7 @@ function CartItem({product, onClick}: Props) {
                 <button 
                     className="cart-item-controls"
                     type="button"
-                    onClick={() => onClick("decrease", product.id)}
+                    onClick={() => onClick({id: product.id, value: product.quantity - 1})}
                 >
                     -
                 </button>
@@ -34,7 +34,7 @@ function CartItem({product, onClick}: Props) {
                 <button 
                     className="cart-item-controls"
                     type="button"
-                    onClick={() => onClick("increase", product.id)}
+                    onClick={() => onClick({id: product.id, value: product.quantity + 1})}
                 >
                     +
                 </button>

@@ -3,11 +3,15 @@ import CartItem from '../cart-item';
 import MiniCart from '../mini-cart';
 import './styles.css';
 import Menu from '../menu';
-import { useCart } from '@/contexts';
+import { useCart, useCartDispatch } from '@/contexts';
 
 function Header() {
     const { items, totalItems } = useCart()
-    const handleEditCart = (action: string, id: string) => alert(`${action} ${id}`)
+    const dispatch = useCartDispatch()
+
+    const handleEditCart = ({ id, value}: { id: string, value: number}) => {
+        dispatch({ type: "CHANGE_QUANTITY", id, quantity: value })
+    }
 
     return (
         <header className='header'>
