@@ -43,14 +43,14 @@ function CartItem({ item }: { item: CartItemModel }) {
 export function CartScreen() {
     const cart = useCart()
     
+    const items = cart.items.map ((item) => 
+        <CartItem item={item} />
+    )
+
     return (
         <div className="cart">
             <div className="title">Carrinho</div>
-            <div className="cart__items">
-                { cart.items.map ((item) => 
-                    <CartItem item={item} />
-                )}
-            </div>
+            <div className="cart__items">{items}</div>
             <div className="cart__summary">
                 <div className="cart__view-total-price">
                     <div className="cart__total-price">
