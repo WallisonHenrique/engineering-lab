@@ -1,7 +1,9 @@
 import NumberField from "@/components/NumberField"
 import { ProductCard } from "@/components/ProductCard"
+import { TotalPrice } from "@/components/TotalPrice"
 import { useCart, useCartDispatch } from "@/contexts"
 import type { CartItemModel } from "@/types"
+import './CartScreen.css'
 
 function CartQuantityControl({ item }: { item: CartItemModel }) {
     const dispatch = useCartDispatch()
@@ -39,17 +41,24 @@ function CartItem({ item }: { item: CartItemModel }) {
 }
 
 export function CartScreen() {
-    const { items } = useCart()
+    const cart = useCart()
     
     return (
         <div className="cart">
             <div className="title">Carrinho</div>
             <div className="cart__items">
-                { items.map ((item) => 
+                { cart.items.map ((item) => 
                     <CartItem item={item} />
                 )}
             </div>
-            <div className="cart__summary"></div>
+            <div className="cart__summary">
+                <div className="cart__view-total-price">
+                    <div className="cart__total-price">
+                        Total
+                        <TotalPrice value={cart.totalPrice} />
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
