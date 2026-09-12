@@ -2,13 +2,13 @@ import "./styles.css"
 
 interface Props {
     product: {
-        id: number
-        photo: string
+        id: string
+        image: string
         name: string
         price: number
-        qtd: number
+        quantity: number
     }
-    onClick: (action: string, id: number) => void
+    onClick: (action: string, id: string) => void
 }
 
 function CartItem({product, onClick}: Props) {
@@ -16,7 +16,7 @@ function CartItem({product, onClick}: Props) {
         <li className="cart-item">
             <div className="cart-item-photo">
                 <img 
-                    src={product.photo}
+                    src={product.image}
                     alt={product.name}
                 />
             </div>
@@ -30,7 +30,7 @@ function CartItem({product, onClick}: Props) {
                 >
                     -
                 </button>
-                <span className="cart-item-qtd">{product.qtd}</span>
+                <span className="cart-item-qtd">{product.quantity}</span>
                 <button 
                     className="cart-item-controls"
                     type="button"
