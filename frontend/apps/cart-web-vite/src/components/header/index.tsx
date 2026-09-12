@@ -3,15 +3,10 @@ import CartItem from '../cart-item';
 import MiniCart from '../mini-cart';
 import './styles.css';
 import Menu from '../menu';
-import { useCart, useCartDispatch } from '@/contexts';
+import { useCart } from '@/contexts';
 
 function Header() {
     const { items, totalItems } = useCart()
-    const dispatch = useCartDispatch()
-
-    const handleEditCart = ({ id, value}: { id: string, value: number}) => {
-        dispatch({ type: "CHANGE_QUANTITY", id, quantity: value })
-    }
 
     return (
         <header className='header'>
@@ -20,10 +15,7 @@ function Header() {
                 <CartButtom>{totalItems}</CartButtom>
                 <div className='mini-cart-dropdown'>
                     <MiniCart>{items.map(i => (
-                        <CartItem
-                            product={i}
-                            onClick={handleEditCart}
-                        />
+                        <CartItem product={i} />
                     ))}</MiniCart>
                 </div>
             </div>

@@ -1,4 +1,6 @@
+import NumberField from "@/components/NumberField"
 import "./styles.css"
+import { useCartDispatch } from "@/contexts"
 
 interface Props {
     product: {
@@ -8,10 +10,15 @@ interface Props {
         price: number
         quantity: number
     }
-    onClick: ({ id, value}: { id: string, value: number}) => void
 }
 
-function CartItem({product, onClick}: Props) {
+function CartItem({product}: Props) {
+    const dispatch = useCartDispatch()
+
+    const handleEditCart = (value: number) => {
+        dispatch({ type: "CHANGE_QUANTITY", id: product.id, quantity: value })
+    }
+
     return (
         <li className="cart-item">
             <div className="cart-item-photo">
@@ -23,21 +30,11 @@ function CartItem({product, onClick}: Props) {
             <div className="cart-item-name">{product.name}</div>
             <div className="cart-item-price">R$ {product.price}</div>
             <div className="cart-item-counter">
-                <button 
-                    className="cart-item-controls"
-                    type="button"
-                    onClick={() => onClick({id: product.id, value: product.quantity - 1})}
-                >
-                    -
-                </button>
-                <span className="cart-item-qtd">{product.quantity}</span>
-                <button 
-                    className="cart-item-controls"
-                    type="button"
-                    onClick={() => onClick({id: product.id, value: product.quantity + 1})}
-                >
-                    +
-                </button>
+                <NumberField 
+                    value={product.quantity} 
+                    min={1} 
+                    onChange={handleEditCart} 
+                />
             </div>
         </li>
     )
