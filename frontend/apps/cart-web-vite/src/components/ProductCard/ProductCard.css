@@ -3,13 +3,24 @@
     align-items: center;
     gap: 20px;
     font-size: 20px;
+    border-bottom: 1px solid #ccc;
 }
 
-.large .product-card__image {
+.product-card__image {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.product-card__image img {
+    width: 100%;
+}
+
+.product-card--large .product-card__image {
     width: 100px;
     height: 100px;
 }
 
-.large .product-card__name {
+.product-card--large .product-card__name {
     width: 150px;
 }

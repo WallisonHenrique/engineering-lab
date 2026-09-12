@@ -1,3 +1,4 @@
+import { toCurrency } from "@/utils/helpers"
 import "./ProductCard.css"
 
 interface ProductCardProps {
@@ -5,20 +6,7 @@ interface ProductCardProps {
     size?: string
 }
 
-interface ProductCardImageProps {
-    url: string
-    alt: string
-}
-
-interface ProductCardNameProps {
-    name: string
-}
-
-interface ProductCardPriceProps {
-    price: string
-}
-
-function ProductCardImage({url, alt}: ProductCardImageProps) {
+function ProductCardImage({url, alt}: { url: string, alt: string }) {
     return (
         <div className="product-card__image">
             <img src={url} alt={alt} />
@@ -26,18 +14,19 @@ function ProductCardImage({url, alt}: ProductCardImageProps) {
     )
 }
 
-function ProductCardName({name}: ProductCardNameProps) {
+function ProductCardName({name}: { name: string }) {
     return <div className="product-card__name">{name}</div>
 }
 
-function ProductCardPrice({price}: ProductCardPriceProps) {
-    return <div className="product-card__price">{price}</div>
+function ProductCardPrice({price}: { price: number }) {
+    return <div className="product-card__price">{toCurrency(price)}</div>
 }
 
 export function ProductCard({size = "large", children}: ProductCardProps) {
-    return <div className={`product-card ${size}`}>{children}</div>
+    const cardClassName = `product-card product-card--${size}`
+    return <div className={cardClassName}>{children}</div>
 }
 
-ProductCard.Image = ProductCardImage;
-ProductCard.Name = ProductCardName;
-ProductCard.Price = ProductCardPrice;
+ProductCard.Image = ProductCardImage
+ProductCard.Name = ProductCardName
+ProductCard.Price = ProductCardPrice

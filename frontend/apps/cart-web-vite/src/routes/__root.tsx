@@ -1,10 +1,13 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import MainLayout from "../components/main-layout";
+import { CartProvider } from "@/contexts";
 
 export const Route = createRootRoute({
   component: () => (
-    <MainLayout>
-        <Outlet /> 
-    </MainLayout>
+    <CartProvider>
+      <MainLayout>
+          <Outlet /> 
+      </MainLayout>
+    </CartProvider>
   ),
 })
