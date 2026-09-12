@@ -25,3 +25,22 @@
 .mini-cart-dropdown:hover {
     display: block;
 }
+
+.mini-cart__view-cart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 16px;
+    gap: 20px;
+}
+
+.mini-cart__view-cart .button {
+    font-size: 14px;
+    padding: 6px 12px;
+}
+
+.mini-cart__total-price {
+    display: flex;
+    gap: 10px;
+}
