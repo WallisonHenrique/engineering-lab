@@ -1,0 +1,20 @@
+.product-detail__view-cart,
+.product-detail__add-to-cart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    font-size: 20px;
+    gap: 20px;
+}
+
+.product-detail__total-price {
+    display: flex;
+    gap: 10px;
+}
+
+.product-detail__add-to-cart .button {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
