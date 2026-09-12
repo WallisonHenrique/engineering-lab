@@ -3,6 +3,7 @@ import CartItem from '../cart-item';
 import MiniCart from '../mini-cart';
 import './styles.css';
 import Menu from '../menu';
+import { useCart } from '@/contexts';
 
 const PHOTO = "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR1ieevip1Dtt_koA21ZPais5TCTphFsAS8s_Qd0ETjE1D2FZeWWqRS5sqiFM3rzF7U40RvrluU2V3-w7yn1rUfDyi0hBwAB-NgLwwKRkrL2IGolPz8uNqVKg"
 const CART = [
@@ -12,10 +13,10 @@ const CART = [
 ]
 
 function Header() {
+    const { totalItems } = useCart()
     const handleEditCart = (action: string, id: number) => alert(`${action} ${id}`)
 
-    const {count, list} = CART.reduce<{
-        count: number
+    const { list } = CART.reduce<{
         list: React.ReactElement[]
     }>((acc, current) => {
         const cartItem = (
@@ -26,16 +27,15 @@ function Header() {
         )
 
         return {
-            count: acc.count + current.qtd,
             list: [...acc.list, cartItem]
         }
-    }, {count: 0, list: []})
+    }, {list: []})
 
     return (
         <header className='header'>
             <Menu />
             <div className='mini-cart-wrapper'>
-                <CartButtom>{count}</CartButtom>
+                <CartButtom>{totalItems}</CartButtom>
                 <div className='mini-cart-dropdown'>
                     <MiniCart>{list}</MiniCart>
                 </div>
