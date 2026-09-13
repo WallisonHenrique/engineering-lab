@@ -2,6 +2,10 @@ const IMG = "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR1ieevip1Dt
 
 export const CART = [
     { id: "1", image: IMG, name: "Macbook Pro", price: 8000 },
-    { id: "2", image: IMG, name: "Macbook Pro 3", price: 10000 },
-    { id: "3", image: IMG, name: "Macbook Pro 2", price: 9000 }
+    { id: "2", image: IMG, name: "Macbook Pro 2", price: 10000 },
+    { id: "3", image: IMG, name: "Macbook Pro 3", price: 9500 },
+    { id: "4", image: IMG, name: "Macbook Pro 4", price: 9200 },
+    { id: "5", image: IMG, name: "Macbook Pro 5", price: 9100 },
+    { id: "6", image: IMG, name: "Macbook Pro 6", price: 9300 },
+    { id: "7", image: IMG, name: "Macbook Pro 7", price: 9300 },
 ]
