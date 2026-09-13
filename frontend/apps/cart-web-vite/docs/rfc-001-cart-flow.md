@@ -215,3 +215,7 @@ O foco dessa PoC é reproduzir o fluxo mínimo do carrinho e seu gerenciamento d
 ### Alternativas Descartadas
 
 * React Router: Perdeu espaço para outras ferramentas mais modernas que garantem a tipagem das rotas.
+
+## 5. Adendo de Implementação (Changelog)
+* **Quantidade de itens no carrinho**: A média de unidades no carrinho varia de [1,4 (Eletrônicos) a 7,3 (Beleza) em 2024](https://www.shopify.com/blog/basket-size). Por isso, fiz a simulação com até 7 itens diferentes.
+* **Uso de React.memo**: Em alguns casos, como no componente `ProductDetail`, usar ou não o `memo` apresentou o mesmo desempenho. Usar `memo` no Carrinho ou no Mini Carrinho melhorou o tempo de renderização entre 1,5ms a 2ms mas sem impacto significativo no desempenho que justificasse sua implementação.
