@@ -78,7 +78,6 @@ function CartItems() {
 export function CartScreen() {
     return (
         <div className="cart">
-            <div className="title">Carrinho</div>
             <CartItems />
             <CartSummary />
         </div>
