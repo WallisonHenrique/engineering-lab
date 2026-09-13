@@ -5,6 +5,27 @@ import { useCart, useCartDispatch } from "@/contexts"
 import type { CartItemModel } from "@/types"
 import './CartScreen.css'
 
+function CartTotalTotalPrice() {
+    const cart = useCart()
+
+    return (
+        <div className="cart__view-total-price">
+            <div className="cart__total-price">
+                Total
+                <TotalPrice value={cart.totalPrice} />
+            </div>
+        </div>
+    )
+}
+
+function CartSummary() {
+    return (
+        <div className="cart__summary">
+            <CartTotalTotalPrice />
+        </div>
+    )
+}
+
 function CartQuantityControl({ item }: { item: CartItemModel }) {
     const dispatch = useCartDispatch()
 
@@ -40,25 +61,21 @@ function CartItem({ item }: { item: CartItemModel }) {
     )
 }
 
-export function CartScreen() {
+function CartItems() {
     const cart = useCart()
-    
     const items = cart.items.map ((i) => 
         <CartItem key={i.id} item={i} />
     )
 
+    return <div className="cart__items">{items}</div>
+}
+
+export function CartScreen() {
     return (
         <div className="cart">
             <div className="title">Carrinho</div>
-            <div className="cart__items">{items}</div>
-            <div className="cart__summary">
-                <div className="cart__view-total-price">
-                    <div className="cart__total-price">
-                        Total
-                        <TotalPrice value={cart.totalPrice} />
-                    </div>
-                </div>
-            </div>
+            <CartItems />
+            <CartSummary />
         </div>
     )
 }
