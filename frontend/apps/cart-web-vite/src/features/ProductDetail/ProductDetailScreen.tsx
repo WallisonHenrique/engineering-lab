@@ -1,5 +1,4 @@
 import { ProductCard } from "@/components/ProductCard";
-import NumberField from "../../components/NumberField"
 import "./ProductDetailScreen.css"
 import { useState } from "react";
 import type { ProductModel } from "@/types/product";
@@ -8,6 +7,7 @@ import { TotalPrice } from "@/components/TotalPrice";
 import { Button } from "@/components/Button/Button";
 import { Link } from "@tanstack/react-router";
 import { useCart, useCartDispatch } from "@/contexts";
+import NumberField from "@/components/NumberField";
 
 function ProductDetailAddToCart({ product }: { product: ProductModel }) {
     const dispatch = useCartDispatch()
