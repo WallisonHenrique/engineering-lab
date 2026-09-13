@@ -1,9 +1,11 @@
-import { useCart } from '@/contexts'
+import { useCart, useCartDispatch } from '@/contexts'
 import './MiniCart.css'
-import CartItem from '@/components/cart-item'
 import { TotalPrice } from '@/components/TotalPrice'
 import { Link } from '@tanstack/react-router'
 import { Button } from '@/components/Button'
+import { ProductCard } from '@/components/ProductCard'
+import type { CartItemModel } from '@/types'
+import NumberField from '@/components/NumberField'
 
 function MiniCartTotalPrice() {
     const cart = useCart()
@@ -29,9 +31,42 @@ function MiniCartSummary() {
     )
 }
 
+function MiniCartQuantityControl({ item }: { item: CartItemModel }) {
+    const dispatch = useCartDispatch()
+
+    const handleChange = (value: number) => {
+        dispatch({ 
+            type: "CHANGE_QUANTITY", 
+            id: item.id, 
+            quantity: value
+        })
+    }
+
+    return (
+        <div className="mini-cart__quantity-control">
+            <NumberField 
+                value={item.quantity} 
+                min={1} 
+                onChange={handleChange} 
+            />
+        </div>
+    )
+}
+
+function MiniCartItem({ item }: { item: CartItemModel}) {
+    return (
+        <ProductCard>
+            <ProductCard.Image url={item.image} alt={item.name} />
+            <ProductCard.Name name={item.name} />
+            <ProductCard.Price price={item.price} />
+            <MiniCartQuantityControl item={item} />
+        </ProductCard>
+    )
+}
+
 function MiniCartItems() {
     const cart = useCart()
-    const items = cart.items.map(i => <CartItem key={i.id} product={i} />)
+    const items = cart.items.map(i => <MiniCartItem key={i.id} item={i} />)
 
     return (
         <div className="mini-cart__items">{items}</div>
