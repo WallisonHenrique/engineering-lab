@@ -20,7 +20,7 @@ function HeaderMinitCart() {
 
     return (
         <div className="header__mini-cart">
-            <HeaderMinitCartBtn onClick={() => setOpen(true)}/>
+            <HeaderMinitCartBtn onClick={() => setOpen(prev => !prev)}/>
             <div className='header__mini-cart__dropdown'>
                 {open && <MiniCart />}
             </div>
