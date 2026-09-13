@@ -5,12 +5,12 @@ import { useState } from 'react';
 import Menu from '@/components/menu';
 
 function HeaderMinitCartBtn({ onClick }: { onClick: () => void }) {
-    const cart = useCart()
+    const { totalItems } = useCart()
 
     return (
         <button className="header__mini-cart__btn" onClick={onClick}>
             &#128722;
-            <span className="header__mini-cart__badge">{cart.totalItems}</span>
+            {totalItems > 0 && <span className="header__mini-cart__badge">{totalItems}</span>}
         </button>
     )
 }
