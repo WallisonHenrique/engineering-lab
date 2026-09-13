@@ -6,7 +6,7 @@ type CartAction =
     | { type: "REMOVE_ITEM", id: string }
     | { type: "CHANGE_QUANTITY", id: string, quantity: number }
 
-interface CartState {
+export interface CartState {
     items: CartItemModel[]
 }
 
