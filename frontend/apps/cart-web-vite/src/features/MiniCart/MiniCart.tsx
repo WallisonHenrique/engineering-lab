@@ -35,6 +35,11 @@ function MiniCartQuantityControl({ item }: { item: CartItemModel }) {
     const dispatch = useCartDispatch()
 
     const handleChange = (value: number) => {
+        if (value === 0) {
+            dispatch({ type: "REMOVE_ITEM", id: item.id })
+            return
+        }
+
         dispatch({ 
             type: "CHANGE_QUANTITY", 
             id: item.id, 
@@ -46,7 +51,7 @@ function MiniCartQuantityControl({ item }: { item: CartItemModel }) {
         <div className="mini-cart__quantity-control">
             <NumberField 
                 value={item.quantity} 
-                min={1} 
+                min={0} 
                 onChange={handleChange} 
             />
         </div>
