@@ -64,7 +64,7 @@ function ProductDetailViewCart({ totalPrice }: { totalPrice: number }){
 
 function ProductDetailSummary({ product }: { product: ProductModel }) {
     const cart = useCart()
-    const hasCart = cart.getItem({ id: product.id })
+    const hasCart = !!cart.getItem({ id: product.id })
 
     return (
         <div className="product-detail__summary">
