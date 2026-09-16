@@ -6,6 +6,7 @@ import { Button } from '@/components/Button'
 import { ProductCard } from '@/components/ProductCard'
 import type { CartItemModel } from '@/types'
 import NumberField from '@/components/NumberField'
+import { memo } from 'react'
 
 function MiniCartTotalPrice() {
     const cart = useCart()
@@ -69,9 +70,11 @@ function MiniCartItem({ item }: { item: CartItemModel}) {
     )
 }
 
+const MemoMiniCartItem = memo(MiniCartItem)
+
 function MiniCartItems() {
     const cart = useCart()
-    const items = cart.items.map(i => <MiniCartItem key={i.id} item={i} />)
+    const items = cart.items.map(i => <MemoMiniCartItem key={i.id} item={i} />)
 
     return (
         <div className="mini-cart__items">{items}</div>
