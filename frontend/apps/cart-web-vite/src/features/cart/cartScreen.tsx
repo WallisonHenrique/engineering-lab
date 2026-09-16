@@ -4,6 +4,7 @@ import { TotalPrice } from "@/components/TotalPrice"
 import { useCart, useCartDispatch } from "@/contexts"
 import type { CartItemModel } from "@/types"
 import './CartScreen.css'
+import { memo } from "react"
 
 function CartTotalTotalPrice() {
     const cart = useCart()
@@ -66,10 +67,12 @@ function CartItem({ item }: { item: CartItemModel }) {
     )
 }
 
+const MemoCartItem = memo(CartItem)
+
 function CartItems() {
     const cart = useCart()
     const items = cart.items.map ((i) => 
-        <CartItem key={i.id} item={i} />
+        <MemoCartItem key={i.id} item={i} />
     )
 
     return <div className="cart__items">{items}</div>
