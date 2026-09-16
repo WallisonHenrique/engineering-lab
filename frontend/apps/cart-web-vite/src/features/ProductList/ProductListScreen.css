@@ -22,3 +22,8 @@
     position: relative;
     z-index: 2;
 }
+
+.product-list__item .product-card__price {
+    width: 130px;
+    text-align: right;
+}
