@@ -13,8 +13,9 @@
     gap: 10px;
 }
 
-.product-detail__add-to-cart .button {
+.product-detail__add-to-cart__btn .button {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    gap: 20px;
 }
