@@ -1,15 +1,24 @@
-.product-item {
-    border-bottom: 1px solid #ccc;
+.product-list__item {
     color: #000;
-    display: block;
-    padding: 0 15px;
     text-decoration: none;
+    padding: 0 15px;
+    position: relative;
 }
 
-.product-item:last-child {
-    border: none
-}
-
-.product-item:hover {
+.product-list__item:hover {
     background-color: #eee;
+}
+
+.product-list__link {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.product-list__quantity-control {
+    position: relative;
+    z-index: 2;
 }

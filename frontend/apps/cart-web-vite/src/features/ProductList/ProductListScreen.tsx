@@ -2,6 +2,60 @@ import { Link } from "@tanstack/react-router"
 import { ProductCard } from "@/components/ProductCard"
 import "./ProductListScreen.css"
 import { useProducts } from "@/hooks"
+import { useCart, useCartDispatch } from "@/contexts"
+import NumberField from "@/components/NumberField"
+import type { CartItemModel, ProductModel } from "@/types"
+import { memo } from "react"
+
+interface ProductListControlProps { 
+    item: CartItemModel | null
+    product: ProductModel 
+}
+
+function ProductListControl({ item, product }: ProductListControlProps) {
+    const dispatch = useCartDispatch()
+
+    const handleChange = (value: number) => {
+        if (!item) {
+            dispatch({ type: "ADD_ITEM", payload: { ...product, quantity: value } })
+            return
+        }
+
+        if (value === 0) {
+            dispatch({ type: "REMOVE_ITEM", id: product.id })
+            return
+        }
+
+        dispatch({ 
+            type: "CHANGE_QUANTITY", 
+            id: product.id, 
+            quantity: value
+        })
+    }
+
+    return (
+        <div className="product-list__quantity">
+            <NumberField
+                value={item?.quantity || 0} 
+                min={0} 
+                onChange={handleChange} 
+            />
+        </div>
+    )
+}
+
+const MemoProductListControl = memo(ProductListControl)
+
+function ProductListQuantity({ product }: { product: ProductModel }) {
+    const cart = useCart()
+    const item = cart.getItem({ id: product.id })
+
+    return (
+        <div className="product-list__quantity-control">
+            <MemoProductListControl item={item} product={product} />
+        </div>
+    )
+}
 
 export function ProductListScreen() {
     const { products } = useProducts()
@@ -11,18 +65,20 @@ export function ProductListScreen() {
     return (
         <div className="product-list">
             { products.map(i => (
-                <Link
-                    key={i.id}
-                    className="product-item"
-                    to="/produto/$id" 
-                    params={{ id: String(i.id) }}
-                >
+                <div className="product-list__item">
+                    <Link
+                        key={i.id}
+                        className="product-list__link"
+                        to="/produto/$id" 
+                        params={{ id: String(i.id) }}
+                    ></Link>
                     <ProductCard>
                         <ProductCard.Image url={i.image} alt={i.name} />
                         <ProductCard.Name name={i.name} />
                         <ProductCard.Price price={i.price} />
+                        <ProductListQuantity product={i} />
                     </ProductCard>
-                </Link>
+                </div>
             ))}
         </div>
     )
