@@ -33,6 +33,7 @@ function ProductDetailAddToCartBtn({ quantity, product }: ProductDetailAddToCart
 
 function ProductDetailAddToCart({ product }: { product: ProductModel }) {
     const [quantity, setQuantity] = useState(1)
+
     return (
         <div className="product-detail__add-to-cart">
             <NumberField 
@@ -62,11 +63,13 @@ function ProductDetailViewCart({ totalPrice }: { totalPrice: number }){
 }
 
 function ProductDetailSummary({ product }: { product: ProductModel }) {
-    const { item, totalPrice } = useCart(product.id)
+    const cart = useCart()
+    const hasCart = !!cart.getItem({ id: product.id })
+
     return (
         <div className="product-detail__summary">
-            { !!item 
-                ? <ProductDetailViewCart totalPrice={totalPrice} /> 
+            { hasCart 
+                ? <ProductDetailViewCart totalPrice={cart.totalPrice} /> 
                 : <ProductDetailAddToCart product={product} />
             }
         </div>

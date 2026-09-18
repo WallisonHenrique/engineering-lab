@@ -54,29 +54,28 @@ function CartQuantityControl({ item }: { item: CartItemModel }) {
     )
 }
 
-const CartItem = memo(({ item }: { item: CartItemModel }) => (
-    <div className="cart__item">
-        <ProductCard>
-            <ProductCard.Image url={item.image} alt={item.name} />
-            <ProductCard.Name name={item.name} />
-            <ProductCard.Price price={item.price} />
-            <CartQuantityControl item={item} />
-        </ProductCard>
-    </div>
-))
-
-function CartItemWrapper({ id }: { id: string }) {
-    const { item } = useCart(id)
-    return <CartItem item={item} />
-}
-
-function CartItems() {
-    const { itemsIds } = useCart()
+function CartItem({ item }: { item: CartItemModel }) {
     return (
-        <div className="cart__items">
-            {itemsIds.map((i) => <CartItemWrapper key={i} id={i} />)}
+        <div className="cart__item">
+            <ProductCard>
+                <ProductCard.Image url={item.image} alt={item.name} />
+                <ProductCard.Name name={item.name} />
+                <ProductCard.Price price={item.price} />
+                <CartQuantityControl item={item} />
+            </ProductCard>
         </div>
     )
+}
+
+const MemoCartItem = memo(CartItem)
+
+function CartItems() {
+    const cart = useCart()
+    const items = cart.items.map ((i) => 
+        <MemoCartItem key={i.id} item={i} />
+    )
+
+    return <div className="cart__items">{items}</div>
 }
 
 export function CartScreen() {
