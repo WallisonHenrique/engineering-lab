@@ -3,7 +3,7 @@ import "./ProductCard.css"
 
 interface ProductCardProps {
     children: React.ReactNode
-    size?: string
+    size?: "large" | "small"
 }
 
 function ProductCardImage({url, alt}: { url: string, alt: string }) {

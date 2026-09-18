@@ -28,16 +28,13 @@
     position: absolute;
     top: 100%;
     right: -15px;
-    width: 400px;
 }
 
 .mini-cart__view-cart {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 0;
     font-size: 16px;
-    gap: 20px;
 }
 
 .mini-cart__view-cart .button {

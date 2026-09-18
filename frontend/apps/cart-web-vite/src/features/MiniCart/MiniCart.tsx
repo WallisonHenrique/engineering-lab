@@ -61,7 +61,7 @@ function MiniCartQuantityControl({ item }: { item: CartItemModel }) {
 
 function MiniCartItem({ item }: { item: CartItemModel}) {
     return (
-        <ProductCard>
+        <ProductCard size="small">
             <ProductCard.Image url={item.image} alt={item.name} />
             <ProductCard.Name name={item.name} />
             <ProductCard.Price price={item.price} />

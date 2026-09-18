@@ -1,10 +1,20 @@
 .mini-cart {
     list-style: none;
     border: 1px solid #ccc;
-    padding: 5px 10px;
     box-shadow: -5px 5px 5px #ccc;
     background-color: #fff;
     margin: 0;
     position: relative;
     z-index: 999;
+}
+
+.mini-cart__items {
+    height: 404px;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    padding: 15px;
+}
+
+.mini-cart__summary {
+    padding: 15px;
 }
