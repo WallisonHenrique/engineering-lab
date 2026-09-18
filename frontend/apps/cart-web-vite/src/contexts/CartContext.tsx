@@ -7,7 +7,8 @@ type CartAction =
     | { type: "CHANGE_QUANTITY", id: string, quantity: number }
 
 export interface CartState {
-    items: CartItemModel[]
+    itemsById: Record<string, CartItemModel>
+    itemsIds: string[]
 }
 
 interface CartContextValue extends CartState {
@@ -15,44 +16,47 @@ interface CartContextValue extends CartState {
     totalPrice: number
 }
 
-const CartContext = createContext<CartContextValue | null>(null)
+const CartStateContext = createContext<CartContextValue | null>(null)
 const CartDispatchContext = createContext<React.ActionDispatch<[action: CartAction]> | null>(null)
 
 const initialCartState = {
-    items: []
+    itemsById: {},
+    itemsIds: []
 }
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
     const [cart, dispatch] = useReducer(cartReducer, initialCartState)
 
-    const totals = cart.items.reduce((acc, current) => ({
+    const totals = cart.itemsIds.reduce((acc, id) => {
+        const current = cart.itemsById[id];
+        return {
             totalItems: acc.totalItems + current.quantity,
             totalPrice: acc.totalPrice + (current.quantity * current.price)
-        }), { totalItems: 0, totalPrice: 0 })
+        };
+    }, { totalItems: 0, totalPrice: 0 })
 
-    const cartContextValue = useMemo(() => ({...cart, ...totals}), [cart])
+    const cartContextValue = useMemo(() => ({...totals, ...cart}), [cart])
     
     return (
-        <CartContext value={cartContextValue}>
+        <CartStateContext value={cartContextValue}>
             <CartDispatchContext value={dispatch}>
                 {children}
-            </CartDispatchContext>
-        </CartContext>
+            </CartDispatchContext>    
+        </CartStateContext>
     )
 }
 
-export function useCart() {
-    const context = useContext(CartContext)
+export function useCart(id?: string) {
+    const context = useContext(CartStateContext)
 
-    if (!context) {
-        throw new Error('useCart must be used within a CartProvider.');
-    }
+    if (!context) throw new Error('useCart must be used within a CartProvider.')
 
-    const getItem = ({ id }: { id: string }) => {
-        return context.items.find(i => i.id === id) || null
-    }
-
-    return { ...context, getItem }
+    return { 
+        totalItems: context.totalItems,
+        totalPrice: context.totalPrice,
+        item: context.itemsById[id || ''],
+        itemsIds: context.itemsIds
+     }
 }
 
 export function useCartDispatch() {
@@ -68,31 +72,28 @@ export function useCartDispatch() {
 function cartReducer(cart: CartState, action: CartAction) {
     switch (action.type) {
         case 'ADD_ITEM': {
-            return { 
-                items: [...cart.items, {
-                    id: action.payload.id,
-                    image: action.payload.image,
-                    name: action.payload.name,
-                    price: action.payload.price,
-                    quantity: action.payload.quantity
-                }]
+            return {
+                itemsById: { ...cart.itemsById, [action.payload.id]: action.payload },
+                itemsIds: [ ...cart.itemsIds, action.payload.id ]
             }
         }
         case 'CHANGE_QUANTITY': {
             return {
-                items: cart.items.map(i => {
-                    if (i.id === action.id) {
-                        return {...i, 
-                            quantity: action.quantity
-                        }
+                ...cart,
+                itemsById: {
+                    ...cart.itemsById,
+                    [action.id]: {
+                        ...cart.itemsById[action.id],
+                        quantity: action.quantity
                     }
-                    return i
-                })
+                }
             }
         }
         case 'REMOVE_ITEM': {
+            const { [action.id]: removedItem, ...rest } = cart.itemsById
             return {
-                items: cart.items.filter(i => i.id !== action.id)
+                itemsById: rest,
+                itemsIds: cart.itemsIds.filter(i => i !== action.id)
             }
         }
         default: {

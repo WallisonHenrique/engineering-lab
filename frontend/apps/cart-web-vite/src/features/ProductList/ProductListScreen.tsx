@@ -7,12 +7,12 @@ import NumberField from "@/components/NumberField"
 import type { CartItemModel, ProductModel } from "@/types"
 import { memo } from "react"
 
-interface ProductListControlProps { 
+interface ProductListQuantityProps { 
     item: CartItemModel | null
     product: ProductModel 
 }
 
-function ProductListControl({ item, product }: ProductListControlProps) {
+const ProductListQuantity = memo(({ item, product }: ProductListQuantityProps) => {
     const dispatch = useCartDispatch()
 
     const handleChange = (value: number) => {
@@ -42,17 +42,13 @@ function ProductListControl({ item, product }: ProductListControlProps) {
             />
         </div>
     )
-}
+})
 
-const MemoProductListControl = memo(ProductListControl)
-
-function ProductListQuantity({ product }: { product: ProductModel }) {
-    const cart = useCart()
-    const item = cart.getItem({ id: product.id })
-
+function ProductListQuantityControl({ product }: { product: ProductModel }) {
+    const { item } = useCart(product.id)
     return (
         <div className="product-list__quantity-control">
-            <MemoProductListControl item={item} product={product} />
+            <ProductListQuantity item={item} product={product} />
         </div>
     )
 }
@@ -76,7 +72,7 @@ export function ProductListScreen() {
                         <ProductCard.Image url={i.image} alt={i.name} />
                         <ProductCard.Name name={i.name} />
                         <ProductCard.Price price={i.price} />
-                        <ProductListQuantity product={i} />
+                        <ProductListQuantityControl product={i} />
                     </ProductCard>
                 </div>
             ))}

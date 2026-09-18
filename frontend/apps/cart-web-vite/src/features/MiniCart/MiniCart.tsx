@@ -9,12 +9,11 @@ import NumberField from '@/components/NumberField'
 import { memo } from 'react'
 
 function MiniCartTotalPrice() {
-    const cart = useCart()
-
+    const { totalPrice } = useCart()
     return (
         <div className="mini-cart__total-price">
             Total
-            <TotalPrice value={cart.totalPrice} />
+            <TotalPrice value={totalPrice} />
         </div>
     )
 }
@@ -59,25 +58,26 @@ function MiniCartQuantityControl({ item }: { item: CartItemModel }) {
     )
 }
 
-function MiniCartItem({ item }: { item: CartItemModel}) {
-    return (
-        <ProductCard size="small">
-            <ProductCard.Image url={item.image} alt={item.name} />
-            <ProductCard.Name name={item.name} />
-            <ProductCard.Price price={item.price} />
-            <MiniCartQuantityControl item={item} />
-        </ProductCard>
-    )
+const MiniCartItem = memo(({ item }: { item: CartItemModel }) => (
+    <ProductCard size="small">
+        <ProductCard.Image url={item.image} alt={item.name} />
+        <ProductCard.Name name={item.name} />
+        <ProductCard.Price price={item.price} />
+        <MiniCartQuantityControl item={item} />
+    </ProductCard>
+))
+
+function MiniCartItemWrapper({ id }: { id: string}) {
+    const { item } = useCart(id)
+    return <MiniCartItem item={item} />
 }
 
-const MemoMiniCartItem = memo(MiniCartItem)
-
 function MiniCartItems() {
-    const cart = useCart()
-    const items = cart.items.map(i => <MemoMiniCartItem key={i.id} item={i} />)
-
+    const { itemsIds } = useCart()
     return (
-        <div className="mini-cart__items">{items}</div>
+        <div className="mini-cart__items">
+            {itemsIds.map(i => <MiniCartItemWrapper key={i} id={i} />)}
+        </div>
     )
 }
 
