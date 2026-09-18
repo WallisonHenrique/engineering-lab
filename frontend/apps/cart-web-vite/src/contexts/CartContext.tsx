@@ -1,5 +1,5 @@
 import type { CartItemModel } from "@/types";
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useMemo, useReducer } from "react";
 
 type CartAction =
     | { type: "ADD_ITEM", payload: CartItemModel }
@@ -29,9 +29,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             totalItems: acc.totalItems + current.quantity,
             totalPrice: acc.totalPrice + (current.quantity * current.price)
         }), { totalItems: 0, totalPrice: 0 })
+
+    const cartContextValue = useMemo(() => ({...cart, ...totals}), [cart])
     
     return (
-        <CartContext value={{...cart, ...totals}}>
+        <CartContext value={cartContextValue}>
             <CartDispatchContext value={dispatch}>
                 {children}
             </CartDispatchContext>
