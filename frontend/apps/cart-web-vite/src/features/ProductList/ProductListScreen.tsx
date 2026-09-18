@@ -12,7 +12,7 @@ interface ProductListControlProps {
     product: ProductModel 
 }
 
-function ProductListControl({ item, product }: ProductListControlProps) {
+const ProductListControl = memo(({ item, product }: ProductListControlProps) => {
     const dispatch = useCartDispatch()
 
     const handleChange = (value: number) => {
@@ -42,9 +42,7 @@ function ProductListControl({ item, product }: ProductListControlProps) {
             />
         </div>
     )
-}
-
-const MemoProductListControl = memo(ProductListControl)
+})
 
 function ProductListQuantity({ product }: { product: ProductModel }) {
     const cart = useCart()
@@ -52,7 +50,7 @@ function ProductListQuantity({ product }: { product: ProductModel }) {
 
     return (
         <div className="product-list__quantity-control">
-            <MemoProductListControl item={item} product={product} />
+            <ProductListControl item={item} product={product} />
         </div>
     )
 }

@@ -59,7 +59,7 @@ function MiniCartQuantityControl({ item }: { item: CartItemModel }) {
     )
 }
 
-function MiniCartItem({ item }: { item: CartItemModel}) {
+const MiniCartItem = memo(({ item }: { item: CartItemModel}) => {
     return (
         <ProductCard size="small">
             <ProductCard.Image url={item.image} alt={item.name} />
@@ -68,13 +68,11 @@ function MiniCartItem({ item }: { item: CartItemModel}) {
             <MiniCartQuantityControl item={item} />
         </ProductCard>
     )
-}
-
-const MemoMiniCartItem = memo(MiniCartItem)
+})
 
 function MiniCartItems() {
     const cart = useCart()
-    const items = cart.items.map(i => <MemoMiniCartItem key={i.id} item={i} />)
+    const items = cart.items.map(i => <MiniCartItem key={i.id} item={i} />)
 
     return (
         <div className="mini-cart__items">{items}</div>

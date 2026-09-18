@@ -54,7 +54,7 @@ function CartQuantityControl({ item }: { item: CartItemModel }) {
     )
 }
 
-function CartItem({ item }: { item: CartItemModel }) {
+const CartItem = memo(({ item }: { item: CartItemModel }) => {
     return (
         <div className="cart__item">
             <ProductCard>
@@ -65,14 +65,12 @@ function CartItem({ item }: { item: CartItemModel }) {
             </ProductCard>
         </div>
     )
-}
-
-const MemoCartItem = memo(CartItem)
+})
 
 function CartItems() {
     const cart = useCart()
     const items = cart.items.map ((i) => 
-        <MemoCartItem key={i.id} item={i} />
+        <CartItem key={i.id} item={i} />
     )
 
     return <div className="cart__items">{items}</div>
