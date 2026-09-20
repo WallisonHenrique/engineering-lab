@@ -5,15 +5,15 @@ import { useCart, useCartDispatch } from "@/contexts"
 import type { CartItemModel } from "@/types"
 import './CartScreen.css'
 import { memo } from "react"
+import { useCartTotalPrice } from "@/contexts/CartContext"
 
 function CartTotalTotalPrice() {
-    const cart = useCart()
-
+    const total = useCartTotalPrice()
     return (
         <div className="cart__view-total-price">
             <div className="cart__total-price">
                 Total
-                <TotalPrice value={cart.totalPrice} />
+                <TotalPrice value={total} />
             </div>
         </div>
     )
@@ -54,26 +54,24 @@ function CartQuantityControl({ item }: { item: CartItemModel }) {
     )
 }
 
-const CartItem = memo(({ item }: { item: CartItemModel }) => {
-    return (
-        <div className="cart__item">
-            <ProductCard>
-                <ProductCard.Image url={item.image} alt={item.name} />
-                <ProductCard.Name name={item.name} />
-                <ProductCard.Price price={item.price} />
-                <CartQuantityControl item={item} />
-            </ProductCard>
-        </div>
-    )
-})
+const CartItem = memo(({ item }: { item: CartItemModel }) => (
+    <div className="cart__item">
+        <ProductCard>
+            <ProductCard.Image url={item.image} alt={item.name} />
+            <ProductCard.Name name={item.name} />
+            <ProductCard.Price price={item.price} />
+            <CartQuantityControl item={item} />
+        </ProductCard>
+    </div>
+))
 
 function CartItems() {
     const cart = useCart()
-    const items = cart.items.map ((i) => 
-        <CartItem key={i.id} item={i} />
+    return (
+        <div className="cart__items">
+            {cart.allIds.map ((i) => <CartItem key={i} item={cart.byId[i]} />)}
+        </div>
     )
-
-    return <div className="cart__items">{items}</div>
 }
 
 export function CartScreen() {

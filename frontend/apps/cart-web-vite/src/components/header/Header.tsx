@@ -1,23 +1,21 @@
-import { useCart } from '@/contexts';
 import { MiniCart } from '@/features/MiniCart';
 import './Header.css';
 import { useState } from 'react';
 import Menu from '@/components/menu';
+import { useCartTotalItems } from '@/contexts/CartContext';
 
 function HeaderMinitCartBtn({ onClick }: { onClick: () => void }) {
-    const { totalItems } = useCart()
-
+    const total = useCartTotalItems()
     return (
         <button className="header__mini-cart__btn" onClick={onClick}>
             &#128722;
-            {totalItems > 0 && <span className="header__mini-cart__badge">{totalItems}</span>}
+            {total > 0 && <span className="header__mini-cart__badge">{total}</span>}
         </button>
     )
 }
 
 function HeaderMinitCart() {
     const [open, setOpen] = useState(false)
-
     return (
         <div className="header__mini-cart">
             <HeaderMinitCartBtn onClick={() => setOpen(prev => !prev)}/>

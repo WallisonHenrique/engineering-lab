@@ -46,11 +46,9 @@ const ProductListControl = memo(({ item, product }: ProductListControlProps) => 
 
 function ProductListQuantity({ product }: { product: ProductModel }) {
     const cart = useCart()
-    const item = cart.getItem({ id: product.id })
-
     return (
         <div className="product-list__quantity-control">
-            <ProductListControl item={item} product={product} />
+            <ProductListControl item={cart.byId[product.id]} product={product} />
         </div>
     )
 }

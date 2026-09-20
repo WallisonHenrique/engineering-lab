@@ -1,5 +1,5 @@
 import type { CartItemModel } from "@/types";
-import { createContext, useContext, useMemo, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 
 type CartAction =
     | { type: "ADD_ITEM", payload: CartItemModel }
@@ -7,31 +7,23 @@ type CartAction =
     | { type: "CHANGE_QUANTITY", id: string, quantity: number }
 
 export interface CartState {
-    items: CartItemModel[]
+    byId: Record<string, CartItemModel>
+    allIds: string[]
 }
 
-interface CartContextValue extends CartState {
-    totalItems: number
-    totalPrice: number
-}
-
-const CartContext = createContext<CartContextValue | null>(null)
+const CartContext = createContext<CartState | null>(null)
 const CartDispatchContext = createContext<React.ActionDispatch<[action: CartAction]> | null>(null)
 
 const initialCartState = {
-    items: []
+    byId: {},
+    allIds: []
 }
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
     const [cart, dispatch] = useReducer(cartReducer, initialCartState)
 
-    const totals = cart.items.reduce((acc, current) => ({
-            totalItems: acc.totalItems + current.quantity,
-            totalPrice: acc.totalPrice + (current.quantity * current.price)
-        }), { totalItems: 0, totalPrice: 0 })
+    const cartContextValue = {...cart}
 
-    const cartContextValue = useMemo(() => ({...cart, ...totals}), [cart])
-    
     return (
         <CartContext value={cartContextValue}>
             <CartDispatchContext value={dispatch}>
@@ -48,11 +40,29 @@ export function useCart() {
         throw new Error('useCart must be used within a CartProvider.');
     }
 
-    const getItem = ({ id }: { id: string }) => {
-        return context.items.find(i => i.id === id) || null
+    return context
+}
+
+export function useCartTotalItems() {
+    const context = useContext(CartContext)
+
+    if (!context) {
+        throw new Error('useCartTotalItems must be used within a CartProvider.');
     }
 
-    return { ...context, getItem }
+    return context.allIds.reduce((acc, current) => 
+        acc + context.byId[current].quantity, 0)
+}
+
+export function useCartTotalPrice() {
+    const context = useContext(CartContext)
+
+    if (!context) {
+        throw new Error('useCartTotalPrice must be used within a CartProvider.');
+    }
+
+    return context.allIds.reduce((acc, current) => 
+        acc + context.byId[current].price, 0)
 }
 
 export function useCartDispatch() {
@@ -69,30 +79,27 @@ function cartReducer(cart: CartState, action: CartAction) {
     switch (action.type) {
         case 'ADD_ITEM': {
             return { 
-                items: [...cart.items, {
-                    id: action.payload.id,
-                    image: action.payload.image,
-                    name: action.payload.name,
-                    price: action.payload.price,
-                    quantity: action.payload.quantity
-                }]
+                byId: {...cart.byId, [action.payload.id]: action.payload},
+                allIds: [...cart.allIds, action.payload.id]
             }
         }
         case 'CHANGE_QUANTITY': {
             return {
-                items: cart.items.map(i => {
-                    if (i.id === action.id) {
-                        return {...i, 
-                            quantity: action.quantity
-                        }
+                ...cart,
+                byId: { 
+                    ...cart.byId, 
+                    [action.id]: { 
+                        ...cart.byId[action.id], 
+                        quantity: action.quantity 
                     }
-                    return i
-                })
+                }
             }
         }
         case 'REMOVE_ITEM': {
+            const {[action.id]: removed, ...rest} = cart.byId
             return {
-                items: cart.items.filter(i => i.id !== action.id)
+                byId: rest,
+                allIds: cart.allIds.filter(i => i !== action.id)
             }
         }
         default: {

@@ -8,6 +8,7 @@ import { Button } from "@/components/Button/Button"
 import { Link } from "@tanstack/react-router"
 import { useCart, useCartDispatch } from "@/contexts"
 import NumberField from "@/components/NumberField"
+import { useCartTotalPrice } from "@/contexts/CartContext"
 
 interface ProductDetailAddToCartBtnProps {
     quantity: number
@@ -46,12 +47,13 @@ function ProductDetailAddToCart({ product }: { product: ProductModel }) {
     )
 }
 
-function ProductDetailViewCart({ totalPrice }: { totalPrice: number }){
+function ProductDetailViewCart() {
+    const total = useCartTotalPrice()
     return (
         <div className="product-detail__view-cart">
             <div className="product-detail__total-price">
                 Total
-                <TotalPrice value={totalPrice} />
+                <TotalPrice value={total} />
             </div>
             <div className="product-detail__view-cart__btn">
                 <Link to="/carrinho">
@@ -64,12 +66,10 @@ function ProductDetailViewCart({ totalPrice }: { totalPrice: number }){
 
 function ProductDetailSummary({ product }: { product: ProductModel }) {
     const cart = useCart()
-    const hasCart = !!cart.getItem({ id: product.id })
-
     return (
         <div className="product-detail__summary">
-            { hasCart 
-                ? <ProductDetailViewCart totalPrice={cart.totalPrice} /> 
+            { !!cart.byId[product.id] 
+                ? <ProductDetailViewCart /> 
                 : <ProductDetailAddToCart product={product} />
             }
         </div>
