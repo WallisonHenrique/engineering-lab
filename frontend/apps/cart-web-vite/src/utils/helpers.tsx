@@ -1,6 +1,8 @@
+const REAL = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+})
+
 export function toCurrency(value: number) {
-    return new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-    }).format(value)
+    return REAL.format(value)
 }
