@@ -1,6 +1,6 @@
 import "./NumberField.css"
 
-interface Props {
+interface NumberFieldProps {
     value: number
     min?: number
     max?: number
@@ -8,7 +8,7 @@ interface Props {
     onChange: (value: number) => void
 }
 
-function NumberField({value, min = 0, max = 99, step = 1, onChange}: Props) {
+function NumberField({value, min = 0, max = 99, step = 1, onChange}: NumberFieldProps) {
     const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         let result = Number(e.target.value)
 
