@@ -71,17 +71,17 @@ Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para 
 ### Estrutura & Componentes
 
 * Header
-  * Menu
-    * Início (/produtos)
-    * Carrinho (/carrinho)
-   
-  * MiniCart-Btn
-    * useCart (Consumir totalItems do Context API)
+  * HeaderLeft
+    * Menu
+      * Início (/produtos)
+      * Carrinho (/carrinho)
+  * HeaderRight
+    * MiniCart-Btn
+      * useCart (Consumir totalItems do Context API)
    
   * MiniCart (Feature)
-    * useProduct (Busca/carrega o ProductType com base no id na constante CART)
     * useCart (Consumir items, totalPrice, updateItem e removeItem do Context Cart)
-    * Title
+    * useCartDispatch(Consumir addItem, removeItem e changeQuantity de Context art)
     * MiniCart.Items
       * MiniCart.Item
         * ProductCard
@@ -95,7 +95,9 @@ Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para 
 	    * ViewCartBtn
         
 * ProductList (Página)
-  * Title
+  * useProducts()
+  * useCart()
+  * useCartDispatch(Consumir addItem, removeItem e changeQuantity de Context art)
   * ProductCard (Envolvido por Link e UL)
     * ProductCard.Image
     * ProductCard.Title
@@ -103,7 +105,9 @@ Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para 
 
 * ProductDetail (Página)
   * useCart (Consumir getCartItem do Contexto Cart)
-  * Title
+  * useProduct()
+  * useCartTotalPrice()
+  * useCartDispatch(Consumir addItem de Context art)
   * ProductDetail.Item
     * ProductCard
 	  * ProductCard.Image
@@ -119,8 +123,8 @@ Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para 
       * ViewCartBtn
    
 * Cart (Página)
-  * useCart (Consumir items, totalPrice, updateItem e removeItem do Context Cart)
-  * Title
+  * useCart (Consumir items do Context Cart)
+  * useCartDispatch(Consumir addItem, removeItem e changeQuantity de Context art)
   * Cart.Items
     * Cart.Item
       * ProductCard
@@ -135,65 +139,67 @@ Fornecer uma **estrutura mínima de carrinho de compras** não autenticado para 
 ### Contratos de Props, Interfaces de Estado ou Payloads da API
 
 ```typescript
+// Components UI
+
 export interface BaseComponentProps {
-  className?: string;
-  children?: React.ReactNode;
+  className?: string
+  children?: React.ReactNode
 }
 
-export interface ProductImageProps extends BaseComponentProps {
+export interface NumberFieldProps {
+  value: number
+  min?: number
+  max?: number
+  step?: number
+  onChange: (value: number) => void
+}
+
+// Components
+
+export interface ProductCardImageProps {
   src: string;
   alt: string;
 }
 
-export interface AddProductQuantityProps extends BaseComponentProps {
-  value: number;
-  min?: number; // default 1
-  max?: number; // default 99
-  onChange: (value: number) => void;
-}
-
-export interface ProductDetailsProps {
-  id: string;
-}
+// Product
 
 export interface ProductModel {
   id: string;
   image: string;
-  title: string;
+  name: string;
   price: number;
 }
 
-export interface UseProductDetailsProps {
+// Screen
+
+export interface ProductDetailScreenProps {
   id: string;
 }
 
-export type UseProductDetailsResult = ProductModel | null;
+// Cart State
 
 export interface CartItemModel extends ProductModel {
   quantity: number;
+} 
+
+export interface CartState { // UseCartResult
+  byId: Record<string, CartItemModel>
+  allIds: string[]
 }
 
-export type CartAction =
-  | { type: "ADD_ITEM", item: CartItemModel }
-  | { type: "CHANGE_QUANTITY", item: { id: string, quantity: number } }
-  | { type: "REMOVE_ITEM", item: { id: string } };
+type CartAction =
+  | { type: "ADD_ITEM", payload: CartItemModel }
+  | { type: "REMOVE_ITEM", id: string }
+  | { type: "CHANGE_QUANTITY", id: string, quantity: number }
 
-export interface CartState {
-  items: CartItemModel[];
+export interface CartDispatchContext {
+  dispatch: React.Dispatch<CartAction>
 }
 
-export interface CartStateContextValue extends CartState {
-  totalItems: number;
-  totalPrice: number;
-}
+// Cart Hooks
 
-export interface CartDispatchContextValue {
-  dispatch: React.Dispatch<CartAction>;
-}
-
-export interface UseCartStateResult extends CartStateContextValue {
-  getItem: (id: string) => CartItemModel | undefined;
-}
+export type UseCartTotalPriceResult = number;
+export type useCartTotalItems = number;
 ```
 
 ## 4. Riscos & Negativos (Trade-offs)
@@ -219,3 +225,4 @@ O foco dessa PoC é reproduzir o fluxo mínimo do carrinho e seu gerenciamento d
 ## 5. Adendo de Implementação (Changelog)
 * **Quantidade de itens no carrinho**: A média de unidades no carrinho varia de [1,4 (Eletrônicos) a 7,3 (Beleza) em 2024](https://www.shopify.com/blog/basket-size). Por isso, fiz a simulação com até 7 itens diferentes.
 * **Uso de React.memo**: Em alguns casos, como no componente `ProductDetail`, usar ou não o `memo` apresentou o mesmo desempenho. Usar `memo` no Carrinho ou no Mini Carrinho melhorou o tempo de renderização entre 1,5ms a 2ms mas sem impacto significativo no desempenho que justificasse sua implementação.
+* **Decisão final:** Utilizei técnicas para otimizar o desempenho do Context API como separar contextos, separar o componente consumidor em Wrapper e memoizado simulando situações extremas como em um carrinho de compras de supermercado que podem ter de 60 a 80 itens por vez e ecommerces que na página de listagem o produto interage com o estado do carrinho.
