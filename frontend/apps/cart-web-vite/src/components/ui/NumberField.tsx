@@ -1,4 +1,4 @@
-import "./styles.css"
+import "./NumberField.css"
 
 interface Props {
     value: number

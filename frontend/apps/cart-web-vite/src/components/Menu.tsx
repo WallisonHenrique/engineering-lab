@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router"
-import "./styles.css"
+import "./Menu.css"
 
 function Menu() {
     return (

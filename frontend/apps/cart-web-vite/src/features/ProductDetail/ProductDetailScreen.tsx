@@ -4,10 +4,10 @@ import { useState } from "react"
 import type { ProductModel } from "@/types/product"
 import { useProduct } from "@/hooks"
 import { TotalPrice } from "@/components/TotalPrice"
-import { Button } from "@/components/Button/Button"
+import { Button } from "@/components/ui/Button"
 import { Link } from "@tanstack/react-router"
 import { useCart, useCartDispatch } from "@/contexts"
-import NumberField from "@/components/NumberField"
+import NumberField from "@/components/ui/NumberField"
 import { useCartTotalPrice } from "@/contexts/CartContext"
 
 interface ProductDetailAddToCartBtnProps {

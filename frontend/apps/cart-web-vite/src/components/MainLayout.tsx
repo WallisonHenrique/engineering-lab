@@ -1,5 +1,5 @@
-import { Header } from "@/components/header"
-import "./styles.css"
+import { Header } from "@/components/Header"
+import "./MainLayout.css"
 
 function MainLayout({...props}) {
     return (

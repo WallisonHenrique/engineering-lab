@@ -1,4 +1,4 @@
-import NumberField from "@/components/NumberField"
+import NumberField from "@/components/ui/NumberField"
 import { ProductCard } from "@/components/ProductCard"
 import { TotalPrice } from "@/components/TotalPrice"
 import { useCart, useCartDispatch } from "@/contexts"

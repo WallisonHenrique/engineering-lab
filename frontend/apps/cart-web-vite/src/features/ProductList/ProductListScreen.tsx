@@ -3,7 +3,7 @@ import { ProductCard } from "@/components/ProductCard"
 import "./ProductListScreen.css"
 import { useProducts } from "@/hooks"
 import { useCart, useCartDispatch } from "@/contexts"
-import NumberField from "@/components/NumberField"
+import NumberField from "@/components/ui/NumberField"
 import type { CartItemModel, ProductModel } from "@/types"
 import { memo } from "react"
 
