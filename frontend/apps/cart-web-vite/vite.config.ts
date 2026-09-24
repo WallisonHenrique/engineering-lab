@@ -14,8 +14,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      // Diz ao Vite que qualquer import começando com "@/" aponta para a pasta "src"
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(import.meta.dirname, './src'),
     },
   },
 })
