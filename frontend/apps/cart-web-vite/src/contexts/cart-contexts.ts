@@ -1,4 +1,4 @@
-import type { CartItemModel } from "@/types/cart"
+import type { CartItemModel } from "@/types/cart-types"
 import { createContext } from "react"
 
 export interface CartState {

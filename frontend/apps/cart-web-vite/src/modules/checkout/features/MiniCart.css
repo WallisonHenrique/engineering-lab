@@ -1,0 +1,47 @@
+.mini-cart {
+    position: relative;
+    height: 100%;
+    display: flex;
+}
+
+.mini-cart__btn {
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.mini-cart__dropdown {
+    position: absolute;
+    top: 100%;
+    right: -15px;
+}
+
+.mini-cart__content {
+    border: 1px solid #ccc;
+    box-shadow: -5px 5px 5px #ccc;
+    background-color: #fff;
+    margin: 0;
+    position: relative;
+    z-index: 3;
+}
+
+.mini-cart__content .cart__items {
+    height: 404px;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    padding: 15px;
+}
+
+.mini-cart__content .product-card__price {
+    width: 87px;
+}
+
+.mini-cart__content .cart__summary {
+    font-size: 16px;
+}
+
+.mini-cart__content .cart__summary .button {
+    font-size: 14px;
+    padding: 6px 12px;
+}

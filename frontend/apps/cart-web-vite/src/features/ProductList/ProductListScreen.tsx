@@ -3,9 +3,9 @@ import { ProductCard } from "@/components/ProductCard"
 import "./ProductListScreen.css"
 import NumberField from "@/components/ui/NumberField"
 import { memo } from "react"
-import { useCart, useCartDispatch } from "@/hooks/use-cart"
-import type { ProductModel } from "@/types/product"
-import type { CartItemModel } from "@/types/cart"
+import { useCart, useCartDispatch } from "@/modules/checkout/hooks/use-cart"
+import type { ProductModel } from "@/types/product-types"
+import type { CartItemModel } from "@/types/cart-types"
 import { useProducts } from "@/hooks/useProducts"
 
 interface ProductListControlProps { 

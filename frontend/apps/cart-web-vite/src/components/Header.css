@@ -10,39 +10,3 @@
 .header__right {
     height: 100%;
 }
-
-.header__mini-cart {
-    position: relative;
-    height: 100%;
-    display: flex;
-}
-
-.header__mini-cart__btn {
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    padding: 5px;
-}
-
-.header__mini-cart__dropdown {
-    position: absolute;
-    top: 100%;
-    right: -15px;
-}
-
-.mini-cart__view-cart {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 16px;
-}
-
-.mini-cart__view-cart .button {
-    font-size: 14px;
-    padding: 6px 12px;
-}
-
-.mini-cart__total-price {
-    display: flex;
-    gap: 10px;
-}
