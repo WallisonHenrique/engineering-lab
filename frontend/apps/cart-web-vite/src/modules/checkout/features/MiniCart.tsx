@@ -1,6 +1,6 @@
 import './MiniCart.css'
 import { Link } from '@tanstack/react-router'
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/shared/ui/Button'
 import { CartSummary } from '@/modules/checkout/components/CartSummary'
 import { CartItems } from '@/modules/checkout/components/CartItems'
 import { useState } from 'react'

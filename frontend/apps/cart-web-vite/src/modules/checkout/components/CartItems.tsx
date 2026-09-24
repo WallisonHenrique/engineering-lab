@@ -1,8 +1,8 @@
-import { ProductCard } from "@/components/ProductCard"
-import NumberField from "@/components/ui/NumberField"
+import { ProductCard } from "@/shared/components/ProductCard"
+import NumberField from "@/shared/ui/NumberField"
 import { useCart, useCartDispatch } from "@/modules/checkout/hooks/use-cart"
-import type { CartItemModel } from "@/types/cart-types"
-import type { SizeType } from "@/types/product-card-types"
+import type { CartItemModel } from "@/shared/types/cart-types"
+import type { SizeType } from "@/shared/types/product-card-types"
 import { memo } from "react"
 
 export function CartQuantityControl({ item }: { item: CartItemModel }) {

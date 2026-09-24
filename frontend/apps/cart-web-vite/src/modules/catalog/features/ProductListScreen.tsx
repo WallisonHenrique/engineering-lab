@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router"
-import { ProductCard } from "@/components/ProductCard"
+import { ProductCard } from "@/shared/components/ProductCard"
 import "./ProductListScreen.css"
-import NumberField from "@/components/ui/NumberField"
+import NumberField from "@/shared/ui/NumberField"
 import { memo } from "react"
 import { useCart, useCartDispatch } from "@/modules/checkout/hooks/use-cart"
-import type { CartItemModel } from "@/types/cart-types"
+import type { CartItemModel } from "@/shared/types/cart-types"
 import type { ProductModel } from "@/modules/catalog/types/product-types"
 import { useProducts } from "@/modules/catalog/hooks/use-products"
 

@@ -1,6 +1,6 @@
-import { toCurrency } from "@/utils/helpers"
+import { toCurrency } from "@/shared/utils/helpers"
 import "./ProductCard.css"
-import type { SizeType } from "@/types/product-card-types"
+import type { SizeType } from "@/shared/types/product-card-types"
 
 interface ProductCardProps {
     children: React.ReactNode

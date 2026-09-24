@@ -8,10 +8,10 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as CarrinhoRouteImport } from './routes/carrinho'
-import { Route as ProdutoIdRouteImport } from './routes/produto.$id'
+import { Route as rootRouteImport } from './app-shell/routes/__root'
+import { Route as IndexRouteImport } from './app-shell/routes/index'
+import { Route as CarrinhoRouteImport } from './app-shell/routes/carrinho'
+import { Route as ProdutoIdRouteImport } from './app-shell/routes/produto.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',

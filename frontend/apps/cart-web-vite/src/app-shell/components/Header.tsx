@@ -1,5 +1,5 @@
 import './Header.css';
-import Menu from '@/components/Menu';
+import Menu from '@/app-shell/components/Menu';
 import { MiniCart } from '@/modules/checkout/features/MiniCart';
 
 export function Header() {

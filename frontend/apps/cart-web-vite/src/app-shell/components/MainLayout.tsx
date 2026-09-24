@@ -1,4 +1,4 @@
-import { Header } from "@/components/Header"
+import { Header } from "@/app-shell/components/Header"
 import "./MainLayout.css"
 
 function MainLayout({...props}) {

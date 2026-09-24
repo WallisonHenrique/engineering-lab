@@ -1,6 +1,6 @@
-import { TotalPrice } from "@/components/TotalPrice";
+import { TotalPrice } from "@/shared/components/TotalPrice";
 import { useCartTotalPrice } from "@/modules/checkout/hooks/use-cart";
-import type { BaseComponentProps } from "@/types/base-component-types";
+import type { BaseComponentProps } from "@/shared/types/base-component-types";
 import './CartSummary.css'
 
 export function CartTotalPrice() {

@@ -1,4 +1,4 @@
-import { CART } from "@/utils/constants";
+import { CART } from "@/shared/utils/constants";
 
 export function useProduct({ id }: { id: string }) {
     return { product: CART.find(item => item.id === id) }
