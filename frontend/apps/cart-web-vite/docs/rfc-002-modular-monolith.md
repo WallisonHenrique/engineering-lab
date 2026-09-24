@@ -7,7 +7,7 @@
 
 ### 1. Objetivo / Problema
 * Refatorar a aplicação atual `cart-web-vite` de um monito base para um Monólito Modular.
-* **Objetivo:** Isolar as lógicas de domínio centrais (Carrinho e Produtos) dentro do próprio projeto. Isso vai evitar **"Big Ball of Mud"** componentes altamente acoplados, dependências confusas e entrelaçadas e preparar o terreno para a futura migração para Monorepo/Micro-frontend.
+* **Objetivo:** Isolar as lógicas de domínio centrais (Carrinho e Produtos) dentro do próprio projeto através de organização de pastas e definição de regras de limites. Isso vai evitar **"Big Ball of Mud"** componentes altamente acoplados, dependências confusas e entrelaçadas e preparar o terreno para a futura migração para Monorepo/Micro-frontend.
 
 ### 2. Solução Proposta (Arquitetura e Contratos)
 * **Estratégia de Pastas:**
