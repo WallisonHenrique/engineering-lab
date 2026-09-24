@@ -6,9 +6,8 @@ import { useProduct } from "@/hooks"
 import { TotalPrice } from "@/components/TotalPrice"
 import { Button } from "@/components/ui/Button"
 import { Link } from "@tanstack/react-router"
-import { useCart, useCartDispatch } from "@/contexts"
 import NumberField from "@/components/ui/NumberField"
-import { useCartTotalPrice } from "@/contexts/CartContext"
+import { useCart, useCartDispatch, useCartTotalPrice } from "@/hooks/use-cart"
 
 interface ProductDetailAddToCartBtnProps {
     quantity: number
@@ -68,7 +67,7 @@ function ProductDetailSummary({ product }: { product: ProductModel }) {
     const cart = useCart()
     return (
         <div className="product-detail__summary">
-            { !!cart.byId[product.id] 
+            { cart.byId[product.id] 
                 ? <ProductDetailViewCart /> 
                 : <ProductDetailAddToCart product={product} />
             }

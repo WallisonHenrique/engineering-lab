@@ -1,11 +1,10 @@
 import NumberField from "@/components/ui/NumberField"
 import { ProductCard } from "@/components/ProductCard"
 import { TotalPrice } from "@/components/TotalPrice"
-import { useCart, useCartDispatch } from "@/contexts"
 import type { CartItemModel } from "@/types"
 import './CartScreen.css'
 import { memo } from "react"
-import { useCartTotalPrice } from "@/contexts/CartContext"
+import { useCart, useCartDispatch, useCartTotalPrice } from "@/hooks/use-cart"
 
 function CartTotalTotalPrice() {
     const total = useCartTotalPrice()

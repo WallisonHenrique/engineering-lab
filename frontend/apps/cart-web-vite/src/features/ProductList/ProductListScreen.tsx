@@ -2,10 +2,10 @@ import { Link } from "@tanstack/react-router"
 import { ProductCard } from "@/components/ProductCard"
 import "./ProductListScreen.css"
 import { useProducts } from "@/hooks"
-import { useCart, useCartDispatch } from "@/contexts"
 import NumberField from "@/components/ui/NumberField"
 import type { CartItemModel, ProductModel } from "@/types"
 import { memo } from "react"
+import { useCart, useCartDispatch } from "@/hooks/use-cart"
 
 interface ProductListControlProps { 
     item: CartItemModel | null
@@ -61,9 +61,8 @@ export function ProductListScreen() {
     return (
         <div className="product-list">
             { products.map(i => (
-                <div className="product-list__item">
+                <div key={i.id} className="product-list__item">
                     <Link
-                        key={i.id}
                         className="product-list__link"
                         to="/produto/$id" 
                         params={{ id: String(i.id) }}

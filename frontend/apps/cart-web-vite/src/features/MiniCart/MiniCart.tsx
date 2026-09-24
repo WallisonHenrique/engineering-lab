@@ -1,4 +1,3 @@
-import { useCart, useCartDispatch } from '@/contexts'
 import './MiniCart.css'
 import { TotalPrice } from '@/components/TotalPrice'
 import { Link } from '@tanstack/react-router'
@@ -7,7 +6,7 @@ import { ProductCard } from '@/components/ProductCard'
 import type { CartItemModel } from '@/types'
 import NumberField from '@/components/ui/NumberField'
 import { memo } from 'react'
-import { useCartTotalPrice } from '@/contexts/CartContext'
+import { useCart, useCartDispatch, useCartTotalPrice } from '@/hooks/use-cart'
 
 function MiniCartTotalPrice() {
     const total = useCartTotalPrice()
