@@ -1,9 +1,5 @@
 import { toCurrency } from "@/utils/helpers"
 
-interface TotalPriceProps {
-    value: number
-}
-
-export function TotalPrice({ value }: TotalPriceProps) {
+export function TotalPrice({ value }: { value: number }) {
     return <div className="total-price">{toCurrency(value)}</div>
 }
