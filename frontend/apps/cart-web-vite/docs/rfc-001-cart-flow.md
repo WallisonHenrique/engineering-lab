@@ -1,9 +1,7 @@
 # 📄 RFC 001: Fluxo de Carrinho de Compras
 
-* **Status:** Aprovado
+* **Status: Implementada.** O fluxo base foi concluído. A evolução do projeto segue na [RFC 002](./rfc-002-modular-monolith.md).
 * **Data:** 06-09-2026
-* **Autores:** Wallison Henrique
-* **Escopo:** cart-web-vite
 
 ---
 
