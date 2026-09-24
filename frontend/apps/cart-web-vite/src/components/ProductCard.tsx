@@ -1,9 +1,10 @@
 import { toCurrency } from "@/utils/helpers"
 import "./ProductCard.css"
+import type { SizeType } from "@/types/product-card-types"
 
 interface ProductCardProps {
     children: React.ReactNode
-    size?: "large" | "small"
+    size?: SizeType
 }
 
 function ProductCardImage({url, alt}: { url: string, alt: string }) {
