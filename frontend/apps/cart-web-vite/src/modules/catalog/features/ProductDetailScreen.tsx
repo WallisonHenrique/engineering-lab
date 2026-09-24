@@ -1,13 +1,13 @@
 import { ProductCard } from "@/components/ProductCard"
 import "./ProductDetailScreen.css"
 import { useState } from "react"
-import type { ProductModel } from "@/types/product-types"
 import { TotalPrice } from "@/components/TotalPrice"
 import { Button } from "@/components/ui/Button"
 import { Link } from "@tanstack/react-router"
 import NumberField from "@/components/ui/NumberField"
 import { useCart, useCartDispatch, useCartTotalPrice } from "@/modules/checkout/hooks/use-cart"
-import { useProduct } from "@/hooks/useProduct"
+import { useProduct } from "@/modules/catalog/hooks/use-products"
+import type { ProductModel } from "@/modules/catalog/types/product-types"
 
 interface ProductDetailAddToCartBtnProps {
     quantity: number
@@ -65,6 +65,7 @@ function ProductDetailViewCart() {
 
 function ProductDetailSummary({ product }: { product: ProductModel }) {
     const cart = useCart()
+    
     return (
         <div className="product-detail__summary">
             { cart.byId[product.id] 

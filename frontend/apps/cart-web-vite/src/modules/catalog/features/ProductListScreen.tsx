@@ -4,9 +4,9 @@ import "./ProductListScreen.css"
 import NumberField from "@/components/ui/NumberField"
 import { memo } from "react"
 import { useCart, useCartDispatch } from "@/modules/checkout/hooks/use-cart"
-import type { ProductModel } from "@/types/product-types"
 import type { CartItemModel } from "@/types/cart-types"
-import { useProducts } from "@/hooks/useProducts"
+import type { ProductModel } from "@/modules/catalog/types/product-types"
+import { useProducts } from "@/modules/catalog/hooks/use-products"
 
 interface ProductListControlProps { 
     item: CartItemModel | null
@@ -57,7 +57,7 @@ function ProductListQuantity({ product }: { product: ProductModel }) {
 export function ProductListScreen() {
     const { products } = useProducts()
 
-    if (!products) return <div>Produto não encontrado!</div>
+    if (!products) return <div>Produtos não encontrados!</div>
 
     return (
         <div className="product-list">

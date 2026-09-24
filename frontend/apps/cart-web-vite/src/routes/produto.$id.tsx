@@ -1,4 +1,4 @@
-import { ProductDetailScreen } from '@/features/ProductDetail/ProductDetailScreen'
+import { ProductDetailScreen } from '@/modules/catalog/features/ProductDetailScreen'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/produto/$id')({
