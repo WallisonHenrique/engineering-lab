@@ -1,4 +1,4 @@
-import { CartContext, CartDispatchContext, type CartAction, type CartState } from "@/contexts/cart-contexts";
+import { CartContext, CartDispatchContext, type CartAction, type CartState } from "@/modules/checkout/contexts/cart-contexts";
 import { useReducer } from "react";
 
 const initialCartState = {
