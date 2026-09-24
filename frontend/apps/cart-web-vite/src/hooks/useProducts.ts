@@ -1,4 +1,4 @@
-import { CART } from "@/utils";
+import { CART } from "@/utils/constants";
 
 export function useProducts() {
     return { products: CART }

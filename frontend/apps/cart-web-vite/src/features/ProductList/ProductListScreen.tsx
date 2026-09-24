@@ -1,11 +1,12 @@
 import { Link } from "@tanstack/react-router"
 import { ProductCard } from "@/components/ProductCard"
 import "./ProductListScreen.css"
-import { useProducts } from "@/hooks"
 import NumberField from "@/components/ui/NumberField"
-import type { CartItemModel, ProductModel } from "@/types"
 import { memo } from "react"
 import { useCart, useCartDispatch } from "@/hooks/use-cart"
+import type { ProductModel } from "@/types/product"
+import type { CartItemModel } from "@/types/cart"
+import { useProducts } from "@/hooks/useProducts"
 
 interface ProductListControlProps { 
     item: CartItemModel | null

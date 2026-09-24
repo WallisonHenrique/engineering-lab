@@ -3,10 +3,10 @@ import { TotalPrice } from '@/components/TotalPrice'
 import { Link } from '@tanstack/react-router'
 import { Button } from '@/components/ui/Button'
 import { ProductCard } from '@/components/ProductCard'
-import type { CartItemModel } from '@/types'
 import NumberField from '@/components/ui/NumberField'
 import { memo } from 'react'
 import { useCart, useCartDispatch, useCartTotalPrice } from '@/hooks/use-cart'
+import type { CartItemModel } from '@/types/cart'
 
 function MiniCartTotalPrice() {
     const total = useCartTotalPrice()

@@ -1,8 +1,8 @@
-import { MiniCart } from '@/features/MiniCart';
 import './Header.css';
 import { useState } from 'react';
 import Menu from '@/components/Menu';
 import { useCartTotalItems } from '@/hooks/use-cart';
+import { MiniCart } from '@/features/MiniCart/MiniCart';
 
 function HeaderMinitCartBtn({ onClick }: { onClick: () => void }) {
     const total = useCartTotalItems()

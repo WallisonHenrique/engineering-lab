@@ -1,5 +1,5 @@
+import { ProductDetailScreen } from '@/features/ProductDetail/ProductDetailScreen'
 import { createFileRoute } from '@tanstack/react-router'
-import { ProductDetailScreen } from '@/features/ProductDetail'
 
 export const Route = createFileRoute('/produto/$id')({
   loader: async ({ params }) => ({ id: params.id }),

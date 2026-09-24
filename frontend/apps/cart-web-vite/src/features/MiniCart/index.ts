@@ -1,1 +1,0 @@
-export { MiniCart } from './MiniCart'
