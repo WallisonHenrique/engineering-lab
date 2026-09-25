@@ -12,6 +12,7 @@ module.exports = {
       to: {
         path: "^src/modules/[^/]+/",
         pathNot: "^src/modules/$1/",
+        dependencyTypesNot: ["type-only"],
       },
     },
     {
