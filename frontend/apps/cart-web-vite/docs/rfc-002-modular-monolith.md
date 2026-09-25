@@ -33,6 +33,9 @@
   ```
 
 * **Regras de Acoplamento:**
-  * Componentes dentro de `modules/products/` não podem importar diretamente arquivos internos de `modules/checkout/` sem passar por uma interface pública limpa.
+  * Os `modules/` podem importar recursos do `shared/` mas o inverso não é permitido, respeitando a hierarquia das camadas que somente as de cima dependem das de baixo. O `shared/` pode importar recursos internos e os `modules/` só podem importar de si mesmo, bloqueado para os demais. Há uma exceção entre os `modules` para permitir importação de `types/` já que podem ser validados em tempo de build e permite independência dos módulos. Também a `app-shell/` pode importar de `modules/` e consome as rotas a partir de uma interface pública.
 
-### 3. Decisões e Aprendizados (Preencher durante ou após a implementação)
+### 3. Decisões e Aprendizados
+* **Dependency Cruiser:** Foi implementada a lib para definir regras de dependências entre `modules/` e camadas da aplicação. Sua escolha é motivada por ser amplamente utilizada, constatemente atualizada e agnóstica: permitindo usar o *OXlint* ao invés do ESlint. Além disso, permite rastrear dependências circulares e identificar se os recursos são realmente compartilhados.
+
+* **Rotas acopladas aos módulos:** Para garantir independência e evitar sobrecarga de responsabilidade sobre o `app-shell/` as rotas foram exportadas atráves de interace pública dos seus respectivos módulos e o **shell** consome e adicionar o layout na `sharedRootRoute` compartilhada.
