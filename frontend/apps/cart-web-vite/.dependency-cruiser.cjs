@@ -39,6 +39,19 @@ module.exports = {
       }
     },
     {
+      name: "shared-minimum-dependents",
+      comment:
+        "Shared modules should be depended on by at least 2 modules.",
+      severity: "error",
+      module: {
+        path: "^src/shared/",
+        numberOfDependentsLessThan: 2,
+      },
+      from: {
+        path: "^src/",
+      },
+    },
+    {
       name: 'no-orphans',
       comment:
         "This is an orphan module - it's likely not used (anymore?). Either use it or " +
