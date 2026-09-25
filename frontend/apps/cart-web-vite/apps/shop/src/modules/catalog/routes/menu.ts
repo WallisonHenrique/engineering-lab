@@ -1,4 +1,4 @@
-import type { MenuItemModel } from "@/shared/types/menu-types";
+import type { MenuItemModel } from "@cart-web-vite/shared/types/menu-types";
 
 export const catalogMenuItems: MenuItemModel[] = [
   {

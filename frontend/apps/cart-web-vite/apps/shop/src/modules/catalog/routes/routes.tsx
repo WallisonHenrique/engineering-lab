@@ -1,5 +1,5 @@
 import { createRoute, lazyRouteComponent, Outlet } from '@tanstack/react-router';
-import { sharedRootRoute } from '@/shared/routes/routes';
+import { sharedRootRoute } from '@cart-web-vite/shared/routes/routes';
 
 export const catalogBaseRoute = createRoute({
   getParentRoute: () => sharedRootRoute,

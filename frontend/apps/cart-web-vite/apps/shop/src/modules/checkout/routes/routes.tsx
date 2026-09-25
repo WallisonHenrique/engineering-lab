@@ -1,4 +1,4 @@
-import { sharedRootRoute } from "@/shared/routes/routes";
+import { sharedRootRoute } from "@cart-web-vite/shared/routes/routes";
 import { createRoute, lazyRouteComponent, Outlet } from "@tanstack/react-router";
 
 export const checkoutBaseRoute = createRoute({

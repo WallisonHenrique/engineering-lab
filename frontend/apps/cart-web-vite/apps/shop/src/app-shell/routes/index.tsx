@@ -1,7 +1,7 @@
 import MainLayout from "@/app-shell/components/MainLayout";
 import { catalogRoutes } from "@/modules/catalog";
 import { checkoutRoutes } from "@/modules/checkout";
-import { sharedRootRoute } from "@/shared/routes/routes";
+import { sharedRootRoute } from "@cart-web-vite/shared/routes/routes";
 import { createRouter, Outlet } from "@tanstack/react-router";
 
 sharedRootRoute.options.component = () => (

@@ -1,4 +1,4 @@
-import type { CartItemModel } from "@/shared/types/cart-types"
+import type { CartItemModel } from "@cart-web-vite/shared/types/cart-types"
 import { createContext } from "react"
 
 export interface CartState {

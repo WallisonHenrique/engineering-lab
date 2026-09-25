@@ -1,8 +1,8 @@
-import { ProductCard } from "@/shared/components/ProductCard"
-import NumberField from "@/shared/ui/NumberField"
-import { useCart, useCartDispatch } from "@/shared/hooks/use-cart"
-import type { CartItemModel } from "@/shared/types/cart-types"
-import type { SizeType } from "@/shared/types/product-card-types"
+import { ProductCard } from "@cart-web-vite/shared/components/ProductCard"
+import NumberField from "@cart-web-vite/shared/ui/NumberField"
+import { useCart, useCartDispatch } from "@cart-web-vite/shared/hooks/use-cart"
+import type { CartItemModel } from "@cart-web-vite/shared/types/cart-types"
+import type { SizeType } from "@cart-web-vite/shared/types/product-card-types"
 import { memo } from "react"
 
 export function CartQuantityControl({ item }: { item: CartItemModel }) {

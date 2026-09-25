@@ -1,6 +1,6 @@
-import { TotalPrice } from "@/shared/components/TotalPrice";
-import { useCartTotalPrice } from "@/shared/hooks/use-cart";
-import type { BaseComponentProps } from "@/shared/types/base-component-types";
+import { TotalPrice } from "@cart-web-vite/shared/components/TotalPrice";
+import { useCartTotalPrice } from "@cart-web-vite/shared/hooks/use-cart";
+import type { BaseComponentProps } from "@cart-web-vite/shared/types/base-component-types";
 import './CartSummary.css'
 
 export function CartTotalPrice() {

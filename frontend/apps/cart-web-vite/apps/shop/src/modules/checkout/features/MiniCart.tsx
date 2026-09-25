@@ -1,10 +1,10 @@
 import './MiniCart.css'
 import { Link } from '@tanstack/react-router'
-import { Button } from '@/shared/ui/Button'
+import { Button } from '@cart-web-vite/shared/ui/Button'
 import { CartSummary } from '@/modules/checkout/components/CartSummary'
 import { CartItems } from '@/modules/checkout/components/CartItems'
 import { useState } from 'react'
-import { useCartTotalItems } from '@/shared/hooks/use-cart'
+import { useCartTotalItems } from '@cart-web-vite/shared/hooks/use-cart'
 
 function MiniCartContent() {
     return (
