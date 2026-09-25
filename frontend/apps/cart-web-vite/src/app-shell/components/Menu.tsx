@@ -1,11 +1,18 @@
 import { Link } from "@tanstack/react-router"
 import "./Menu.css"
+import type { MenuItemModel } from "@/shared/types/menu-types";
+import { catalogMenuItems } from '@/modules/catalog'
+import { checkoutMenuItems } from '@/modules/checkout'
+
+const navigationMenu: MenuItemModel[] = [
+    ...catalogMenuItems,
+    ...checkoutMenuItems
+];
 
 function Menu() {
     return (
         <nav className="menu">
-            <Link className="menu-link" to="/">Início</Link>
-            <Link className="menu-link" to="/carrinho">Carrinho</Link>
+            {navigationMenu.map(i => <Link key={i.path} className="menu-link" to={i.path}>{i.label}</Link>)}
         </nav>
     )
 }

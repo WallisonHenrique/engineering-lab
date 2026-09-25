@@ -8,6 +8,7 @@ import NumberField from "@/shared/ui/NumberField"
 import { useCart, useCartDispatch, useCartTotalPrice } from "@/modules/checkout/hooks/use-cart"
 import { useProduct } from "@/modules/catalog/hooks/use-products"
 import type { ProductModel } from "@/modules/catalog/types/product-types"
+import { productDetailRoute } from "@/modules/catalog/routes/routes"
 
 interface ProductDetailAddToCartBtnProps {
     quantity: number
@@ -88,8 +89,10 @@ function ProductDetailItem({ product }: { product: ProductModel }) {
     )
 }
 
-export function ProductDetailScreen({ id }: { id: string }) {
+export function ProductDetailScreen() {
+    const { id } = productDetailRoute.useParams(); 
     const { product } = useProduct({ id });
+    
 
     if (!product) return <div>Produto não encontrado!</div>
     
