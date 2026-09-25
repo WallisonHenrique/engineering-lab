@@ -1,4 +1,4 @@
-import { CartContext, CartDispatchContext } from "@/modules/checkout/contexts/cart-contexts";
+import { CartContext, CartDispatchContext } from "@/shared/contexts/cart-contexts";
 import { useContext } from "react";
 
 export function useCart() {

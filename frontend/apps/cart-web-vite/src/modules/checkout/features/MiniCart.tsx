@@ -4,7 +4,7 @@ import { Button } from '@/shared/ui/Button'
 import { CartSummary } from '@/modules/checkout/components/CartSummary'
 import { CartItems } from '@/modules/checkout/components/CartItems'
 import { useState } from 'react'
-import { useCartTotalItems } from '@/modules/checkout/hooks/use-cart'
+import { useCartTotalItems } from '@/shared/hooks/use-cart'
 
 function MiniCartContent() {
     return (

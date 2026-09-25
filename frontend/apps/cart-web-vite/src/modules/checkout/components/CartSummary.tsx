@@ -1,5 +1,5 @@
 import { TotalPrice } from "@/shared/components/TotalPrice";
-import { useCartTotalPrice } from "@/modules/checkout/hooks/use-cart";
+import { useCartTotalPrice } from "@/shared/hooks/use-cart";
 import type { BaseComponentProps } from "@/shared/types/base-component-types";
 import './CartSummary.css'
 
