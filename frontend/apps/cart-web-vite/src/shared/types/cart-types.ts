@@ -1,5 +1,7 @@
-import type { ProductModel } from "@/modules/catalog/types/product-types";
-
-export interface CartItemModel extends ProductModel {
+export interface CartItemModel {
+    id: string
+    image: string
+    name: string
+    price: number
     quantity: number
 }
