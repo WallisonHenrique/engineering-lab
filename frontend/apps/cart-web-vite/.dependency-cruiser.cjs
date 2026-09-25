@@ -2,6 +2,31 @@
 module.exports = {
   forbidden: [
     {
+      name: "no-cross-module-dependency",
+      comment:
+        "Feature modules can only depend on themselves or shared.",
+      severity: "error",
+      from: {
+        path: "^src/modules/([^/]+)/",
+      },
+      to: {
+        path: "^src/modules/[^/]+/",
+        pathNot: "^src/modules/$1/",
+      },
+    },
+    {
+      name: "no-platform-to-feature",
+      comment:
+        "The sharing module is a platform concern and should not import functionality modules.",
+      severity: "error",
+      from: {
+        path: "^src/(shared)/",
+      },
+      to: {
+        path: "^src/modules/[^/]+/",
+      },
+    },
+    {
       name: 'no-circular',
       severity: 'warn',
       comment:
@@ -196,6 +221,9 @@ module.exports = {
     }
   ],
   options: {
+    cache: {
+      strategy: 'content' // Força o motor a olhar o conteúdo real e as regras ativas, não apenas a data do arquivo
+    },
     // Which modules not to follow further when encountered
     doNotFollow: {
       // path: an array of regular expressions in strings to match against
