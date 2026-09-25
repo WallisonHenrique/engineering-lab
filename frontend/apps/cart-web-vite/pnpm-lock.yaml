@@ -6,7 +6,9 @@ settings:
 
 importers:
 
-  .:
+  .: {}
+
+  apps/shop:
     dependencies:
       '@tanstack/react-router':
         specifier: ^1.170.32
