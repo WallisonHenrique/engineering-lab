@@ -1,6 +1,6 @@
-import { toCurrency } from "@cart-web-vite/shared/src/utils/helpers"
+import { toCurrency } from "@cart-web-vite/shared/utils/helpers"
 import "./ProductCard.css"
-import type { SizeType } from "@cart-web-vite/shared/src/types/product-card-types"
+import type { SizeType } from "@cart-web-vite/shared/types/product-card-types"
 
 interface ProductCardProps {
     children: React.ReactNode
