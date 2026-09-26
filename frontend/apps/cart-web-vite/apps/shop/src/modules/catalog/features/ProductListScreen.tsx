@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router"
 import { ProductCard } from "@cart-web-vite/shared/components/ProductCard"
 import "./ProductListScreen.css"
-import NumberField from "@cart-web-vite/shared/ui/NumberField"
+import NumberField from "@cart-web-vite/ui/NumberField"
 import { memo } from "react"
 import { useCart, useCartDispatch } from "@cart-web-vite/shared/hooks/use-cart"
 import type { CartItemModel } from "@cart-web-vite/shared/types/cart-types"

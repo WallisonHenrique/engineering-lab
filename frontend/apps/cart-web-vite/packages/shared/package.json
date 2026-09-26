@@ -16,7 +16,6 @@
     "./hooks/*": "./hooks/*.ts",
     "./routes/*": "./routes/*.tsx",
     "./types/*": "./types/*.ts",
-    "./ui/*": "./ui/*.tsx",
     "./utils/*": "./utils/*.ts"
   }
 }

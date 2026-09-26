@@ -1,5 +1,5 @@
 import { ProductCard } from "@cart-web-vite/shared/components/ProductCard"
-import NumberField from "@cart-web-vite/shared/ui/NumberField"
+import NumberField from "@cart-web-vite/ui/NumberField"
 import { useCart, useCartDispatch } from "@cart-web-vite/shared/hooks/use-cart"
 import type { CartItemModel } from "@cart-web-vite/shared/types/cart-types"
 import type { SizeType } from "@cart-web-vite/shared/types/product-card-types"
