@@ -4,9 +4,19 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@tanstack/react-router": "^1.170.32",
     "react": "^19.2.8"
   },
   "devDependencies": {
     "@types/react": "^19.2.18"
+  },
+  "exports": {
+    "./components/*": "./components/*.tsx",
+    "./contexts/*": "./contexts/*.ts",
+    "./hooks/*": "./hooks/*.ts",
+    "./routes/*": "./routes/*.tsx",
+    "./types/*": "./types/*.ts",
+    "./ui/*": "./ui/*.tsx",
+    "./utils/*": "./utils/*.ts"
   }
 }
