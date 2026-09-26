@@ -17,6 +17,7 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@cart-web-vite/tooling": "workspace:*",
     "@cart-web-vite/shared": "workspace:*",
     "@tanstack/router-plugin": "^1.168.35",
     "@types/node": "^24.13.3",
