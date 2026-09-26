@@ -2,8 +2,9 @@
   "name": "cart-web-vite",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter cart-web-vite-shop dev",
+    "dev": "pnpm --filter @cart-web-vite/app-shell dev",
     "build": "pnpm -r build",
-    "build:shop": "pnpm --filter cart-web-vite-shop build"
+    "lint": "pnpm -r lint",
+    "preview": "pnpm --filter @cart-web-vite/app-shell preview"
   }
 }
