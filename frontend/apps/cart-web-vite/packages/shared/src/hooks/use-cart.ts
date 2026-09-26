@@ -1,4 +1,4 @@
-import { CartContext, CartDispatchContext } from "@cart-web-vite/shared/contexts/cart-contexts";
+import { CartContext, CartDispatchContext } from "@cart-web-vite/shared/src/contexts/cart-contexts";
 import { useContext } from "react";
 
 export function useCart() {

@@ -11,11 +11,11 @@
     "@types/react": "^19.2.18"
   },
   "exports": {
-    "./components/*": "./components/*.tsx",
-    "./contexts/*": "./contexts/*.ts",
-    "./hooks/*": "./hooks/*.ts",
-    "./routes/*": "./routes/*.tsx",
-    "./types/*": "./types/*.ts",
-    "./utils/*": "./utils/*.ts"
+    "./components/*": "./src/components/*.tsx",
+    "./contexts/*": "./src/contexts/*.ts",
+    "./hooks/*": "./src/hooks/*.ts",
+    "./routes/*": "./src/routes/*.tsx",
+    "./types/*": "./src/types/*.ts",
+    "./utils/*": "./src/utils/*.ts"
   }
 }
