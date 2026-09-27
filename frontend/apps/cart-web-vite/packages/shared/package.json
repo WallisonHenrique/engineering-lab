@@ -13,6 +13,7 @@
   "exports": {
     "./components/*": "./components/*.tsx",
     "./contexts/*": "./contexts/*.ts",
+    "./providers/*": "./providers/*.tsx",
     "./hooks/*": "./hooks/*.ts",
     "./routes/*": "./routes/*.tsx",
     "./types/*": "./types/*.ts",
