@@ -1,6 +1,6 @@
 # RFC 002: Transição para Monólito Modular
 
-* **Status: Em análise.**
+* **Status: Implementada.** O fluxo base foi concluído. A evolução do projeto segue na [RFC 003](./rfc-003-monorepo.md).
 * **Data:** 23-09-2026
 
 ---
