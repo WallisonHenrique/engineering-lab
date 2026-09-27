@@ -5,7 +5,7 @@ export const checkoutBaseRoute = createRoute({
     getParentRoute: () => sharedRootRoute,
     id: 'checkout-layout',
     component: () => <Outlet />,
- })
+})
 
 export const cartRoute = createRoute({
     getParentRoute: () => checkoutBaseRoute,
