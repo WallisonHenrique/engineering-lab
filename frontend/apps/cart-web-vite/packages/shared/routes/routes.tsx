@@ -1,5 +1,5 @@
 import { createRootRoute, Outlet } from '@tanstack/react-router';
-import { AnyRoute, createRouter } from "@tanstack/react-router";
+import { type AnyRoute, createRouter } from "@tanstack/react-router";
 
 export const sharedRootRoute = createRootRoute({
   component: () => <Outlet />, 
