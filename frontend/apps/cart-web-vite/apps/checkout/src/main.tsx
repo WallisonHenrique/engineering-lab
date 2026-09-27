@@ -1,18 +1,19 @@
-import { createRoutes } from '@cart-web-vite/shared/routes/routes'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { checkoutRoutes } from './routes/routes'
+import { cartRoute, checkoutBaseRoute } from './routes/routes'
 import { createRoute, lazyRouteComponent, RouterProvider } from '@tanstack/react-router'
 import { AppProvider } from '@cart-web-vite/shared/providers/app-provider'
+import { createRoutes } from '@cart-web-vite/shared/routes/routes'
 
-export const cartRoute = createRoute({
-    getParentRoute: () => checkoutRoutes,
+const minicartRoute = createRoute({
+    getParentRoute: () => checkoutBaseRoute,
     path: '/',
     component: lazyRouteComponent(() => import('./features/MiniCart').then((m) => ({ default: m.MiniCart })))
 })
 
-checkoutRoutes.addChildren([
+const checkoutRoutes = checkoutBaseRoute.addChildren([
     cartRoute,
+    minicartRoute,
 ])
 
 const router = createRoutes({ routes: [checkoutRoutes]})
