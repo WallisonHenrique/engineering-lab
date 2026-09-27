@@ -1,8 +1,8 @@
 import MainLayout from "@/components/MainLayout";
 import { catalogRoutes } from "@cart-web-vite/catalog/routes";
 import { checkoutRoutes } from "@cart-web-vite/checkout/routes";
-import { sharedRootRoute } from "@cart-web-vite/shared/routes/routes";
-import { createRouter, Outlet } from "@tanstack/react-router";
+import { createRoutes, sharedRootRoute } from "@cart-web-vite/shared/routes/routes";
+import { Outlet } from "@tanstack/react-router";
 
 sharedRootRoute.options.component = () => (
   <MainLayout>
@@ -10,12 +10,12 @@ sharedRootRoute.options.component = () => (
   </MainLayout>
 );
 
-export const routeTree = sharedRootRoute.addChildren([
-  catalogRoutes,
-  checkoutRoutes
-]);
-
-export const router = createRouter({ routeTree })
+export const router = createRoutes({ 
+  routes: [
+    catalogRoutes,
+    checkoutRoutes
+  ]
+})
 
 declare module '@tanstack/react-router' {
   interface Register {

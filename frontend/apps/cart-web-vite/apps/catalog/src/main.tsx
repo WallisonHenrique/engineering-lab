@@ -1,16 +1,16 @@
+import { createRoutes } from '@cart-web-vite/shared/routes/routes'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createRouter, RouterProvider } from '@tanstack/react-router'
-import { catalogRoutes } from './routes/routes';
+import { catalogRoutes } from './routes/routes'
+import { RouterProvider } from '@tanstack/react-router'
+import { AppProvider } from '@cart-web-vite/shared/providers/app-provider'
 
-export const routeTree = catalogRoutes.addChildren([
-  catalogRoutes
-]);
-
-export const router = createRouter({ routeTree })
+const router = createRoutes({ routes: [catalogRoutes]})
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AppProvider>
+      <RouterProvider router={router} />
+    </AppProvider>
   </StrictMode>,
 )
