@@ -2,9 +2,20 @@
   "name": "cart-web-vite",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter @cart-web-vite/app-shell dev",
-    "build": "pnpm -r build",
-    "lint": "pnpm -r lint",
-    "preview": "pnpm --filter @cart-web-vite/app-shell preview"
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "lint": "turbo lint",
+    "preview": "turbo preview",
+    "boundaries": "turbo boundaries"
+  },
+  "devDependencies": {
+    "turbo": "^2.11.4"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.25.0"
+    }
   }
 }

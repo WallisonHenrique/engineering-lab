@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint:syntax": "oxlint",
+    "build": "vite build",
+    "check-types": "tsc --noEmit",
+    "lint": "oxlint",
     "lint:arch": "depcruise src --progress --cache",
-    "lint": "pnpm lint:syntax && pnpm lint:arch",
     "preview": "vite preview"
   },
   "dependencies": {
