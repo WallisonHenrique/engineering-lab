@@ -1,6 +1,6 @@
 # RFC 002: Transição para Monorepo sem Ferramenta
 
-* **Status: Implementado.**
+* **Status: Implementada.** O fluxo base foi concluído. A evolução do projeto segue na [RFC 00](./rfc-004-turborepo.md).
 * **Data:** 27-09-2026
 
 ---
