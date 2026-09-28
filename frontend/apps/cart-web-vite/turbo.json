@@ -18,5 +18,14 @@
     },
     "lint": {},
     "preview": {}
+  },
+  "boundaries": {
+    "tags": {
+      "platform": {
+        "dependencies": {
+          "deny": ["modules"]
+        }
+      }
+    }
   }
 }
