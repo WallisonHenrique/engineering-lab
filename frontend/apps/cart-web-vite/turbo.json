@@ -25,6 +25,11 @@
         "dependencies": {
           "deny": ["modules"]
         }
+      },
+      "modules": {
+        "dependencies": {
+          "deny": ["modules"]
+        }
       }
     }
   }
