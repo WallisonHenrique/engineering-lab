@@ -1,6 +1,6 @@
 # RFC 002: Transição para Monorepo sem Ferramenta
 
-* **Status: Implementada.**
+* **Status: Implementada.** O fluxo base foi concluído. A evolução do projeto segue na [RFC 005](./rfc-005-mfe-iframe.md).
 * **Data:** 28-09-2026
 
 ---
