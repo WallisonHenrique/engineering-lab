@@ -8,7 +8,7 @@ import '@cart-web-vite/shared/styles/global'
 
 const minicartRoute = createRoute({
     getParentRoute: () => checkoutBaseRoute,
-    path: '/',
+    path: '/mini-carrinho',
     component: lazyRouteComponent(() => import('./features/MiniCart').then((m) => ({ default: m.MiniCart })))
 })
 
