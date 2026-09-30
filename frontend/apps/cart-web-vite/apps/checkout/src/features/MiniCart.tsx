@@ -1,46 +1,34 @@
 import './MiniCart.css'
-import { Link } from '@tanstack/react-router'
 import { Button } from '@cart-web-vite/ui/Button'
 import { CartSummary } from '../components/CartSummary'
 import { CartItems } from '../components/CartItems'
-import { useState } from 'react'
-import { useCartTotalItems } from '@cart-web-vite/shared/hooks/use-cart'
+import { useCartIframeListener } from '@cart-web-vite/shared/hooks/use-cart-iframe'
+
+const TARGET_ORIGIN = 'http://localhost:5173'
 
 function MiniCartContent() {
+    const target = {targetWindow: window.parent, targetOrigin: TARGET_ORIGIN}
+
+    const handleClick = () => {
+        window.parent.location.href = TARGET_ORIGIN + '/carrinho';
+    }
+
     return (
         <div className="mini-cart__content">
-            <CartItems size="small" />
+            <CartItems size="small" target={target} />
             <CartSummary>
-                <Link to="/carrinho">
-                    <Button>Ver Carrinho</Button>
-                </Link>
+                <Button onClick={handleClick}>Ver Carrinho</Button>
             </CartSummary>
         </div>
     )
 }
 
-function MiniCartButton({ onClick }: { onClick: () => void }) {
-    const total = useCartTotalItems()
-
-    return (
-        <button className="mini-cart__btn" onClick={onClick}>
-            &#128722;
-            {total > 0 && <span className="mini-cart__badge">{total}</span>}
-        </button>
-    )
-}
-
 export function MiniCart() {
-    const [open, setOpen] = useState(false)
-
+    useCartIframeListener({senderOrigin: 'http://localhost:5173'})
+    
     return (
         <div className="mini-cart">
-            <MiniCartButton onClick={() => setOpen(prev => !prev)}/>
-            {open && (
-                <div className="mini-cart__dropdown">
-                    <MiniCartContent />
-                </div>
-            )}
+            <MiniCartContent />
         </div>
     )
 }
