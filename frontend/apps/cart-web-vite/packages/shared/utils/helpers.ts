@@ -5,6 +5,11 @@ export interface DispatchCartIframe {
     targetOrigin: string
 }
 
+type RedirectToCart = {
+    type: 'REDIRECT_TO_CART'
+    path: string
+}
+
 const REAL = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL'
@@ -15,7 +20,7 @@ export function toCurrency(value: number) {
 }
 
 export function dispatchCartIframe({targetWindow, targetOrigin}: DispatchCartIframe) {
-    return (message: CartAction) => {
+    return (message: CartAction|RedirectToCart) => {
         if (targetWindow) {
             targetWindow.postMessage(message, targetOrigin)
         }

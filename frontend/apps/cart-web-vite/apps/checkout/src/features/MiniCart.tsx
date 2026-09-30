@@ -3,6 +3,7 @@ import { Button } from '@cart-web-vite/ui/Button'
 import { CartSummary } from '../components/CartSummary'
 import { CartItems } from '../components/CartItems'
 import { useCartIframeListener } from '@cart-web-vite/shared/hooks/use-cart-iframe'
+import { dispatchCartIframe } from '@cart-web-vite/shared/utils/helpers'
 
 const TARGET_ORIGIN = 'http://localhost:5173'
 
@@ -10,7 +11,8 @@ function MiniCartContent() {
     const target = {targetWindow: window.parent, targetOrigin: TARGET_ORIGIN}
 
     const handleClick = () => {
-        window.parent.location.href = TARGET_ORIGIN + '/carrinho';
+        const messenger = dispatchCartIframe(target)
+        messenger({type: 'REDIRECT_TO_CART', path: '/carrinho'})
     }
 
     return (
