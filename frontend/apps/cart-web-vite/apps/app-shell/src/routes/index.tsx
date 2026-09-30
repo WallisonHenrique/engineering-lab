@@ -1,14 +1,19 @@
 import MainLayout from "@/components/MainLayout";
 import { catalogRoutes } from "@cart-web-vite/catalog/routes";
 import { checkoutRoutes } from "@cart-web-vite/checkout/routes";
+import { useCartIframeListener } from "@cart-web-vite/shared/hooks/use-cart-iframe";
 import { createRoutes, sharedRootRoute } from "@cart-web-vite/shared/routes/routes";
 import { Outlet } from "@tanstack/react-router";
 
-sharedRootRoute.options.component = () => (
-  <MainLayout>
-    <Outlet /> 
-  </MainLayout>
-);
+sharedRootRoute.options.component = () => {
+  useCartIframeListener({senderOrigin: 'http://localhost:5174'})
+
+  return (
+    <MainLayout>
+      <Outlet /> 
+    </MainLayout>
+  )
+}
 
 export const router = createRoutes({ 
   routes: [
