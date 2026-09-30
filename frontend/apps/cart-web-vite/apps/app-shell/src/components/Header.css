@@ -10,3 +10,30 @@
 .header__right {
     height: 100%;
 }
+
+.header__mini-cart {
+    position: relative;
+    height: 100%;
+    display: flex;
+}
+
+.header__mini-cart__btn {
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.header__mini-cart__dropdown {
+    position: absolute;
+    top: 100%;
+    right: -15px;
+    z-index: 3;
+    border: 1px solid #ccc;
+    box-shadow: -5px 5px 5px #ccc;
+    background-color: #fff;
+}
+
+.header__mini-cart__dropdown iframe {
+    border: none;
+}
