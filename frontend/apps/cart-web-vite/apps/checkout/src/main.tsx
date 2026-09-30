@@ -4,6 +4,7 @@ import { cartRoute, checkoutBaseRoute } from './routes/routes'
 import { createRoute, lazyRouteComponent, RouterProvider } from '@tanstack/react-router'
 import { AppProvider } from '@cart-web-vite/shared/providers/app-provider'
 import { createRoutes } from '@cart-web-vite/shared/routes/routes'
+import '@cart-web-vite/shared/styles/global'
 
 const minicartRoute = createRoute({
     getParentRoute: () => checkoutBaseRoute,

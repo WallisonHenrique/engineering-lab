@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { AppProvider } from '@cart-web-vite/shared/providers/app-provider'
 import { RouterProvider } from '@tanstack/react-router'
 import { router } from '@/routes'
-import '@/styles/global.css'
+import '@cart-web-vite/shared/styles/global'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
