@@ -7,6 +7,8 @@ import { useCart, useCartDispatch } from "@cart-web-vite/shared/hooks/use-cart"
 import type { CartItemModel } from "@cart-web-vite/shared/types/cart-types"
 import type { ProductModel } from "../types/product-types"
 import { useProducts } from "../hooks/use-products"
+import { dispatchCartIframe } from "@cart-web-vite/shared/utils/helpers"
+import type { CartAction } from "@cart-web-vite/shared/contexts/cart-contexts"
 
 interface ProductListControlProps { 
     item: CartItemModel | null
@@ -15,23 +17,30 @@ interface ProductListControlProps {
 
 const ProductListControl = memo(({ item, product }: ProductListControlProps) => {
     const dispatch = useCartDispatch()
-
+    
     const handleChange = (value: number) => {
+        const messenger = dispatchCartIframe({
+            targetWindow: window.__MINI_CART_WINDOW__, 
+            targetOrigin: "http://localhost:5174/mini-carrinho"
+        })
+
         if (!item) {
-            dispatch({ type: "ADD_ITEM", payload: { ...product, quantity: value } })
+            const addItemAction: CartAction = {type: "ADD_ITEM", payload: {...product, quantity: value}}
+            dispatch(addItemAction)
+            messenger(addItemAction)
             return
         }
 
         if (value === 0) {
-            dispatch({ type: "REMOVE_ITEM", id: product.id })
+            const removeItemAction: CartAction = {type: "REMOVE_ITEM", id: product.id}
+            dispatch(removeItemAction)
+            messenger(removeItemAction)
             return
         }
 
-        dispatch({ 
-            type: "CHANGE_QUANTITY", 
-            id: product.id, 
-            quantity: value
-        })
+        const changeQuantityAction: CartAction = {type: "CHANGE_QUANTITY", id: product.id, quantity: value}
+        dispatch(changeQuantityAction)
+        messenger(changeQuantityAction)
     }
 
     return (

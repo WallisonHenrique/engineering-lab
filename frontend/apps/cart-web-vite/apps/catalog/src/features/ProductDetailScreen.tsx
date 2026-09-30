@@ -9,6 +9,8 @@ import { useCart, useCartDispatch, useCartTotalPrice } from "@cart-web-vite/shar
 import { useParams } from "@tanstack/react-router"
 import type { ProductModel } from "../types/product-types"
 import { useProduct } from "../hooks/use-products"
+import { dispatchCartIframe } from "@cart-web-vite/shared/utils/helpers"
+import type { CartAction } from "@cart-web-vite/shared/contexts/cart-contexts"
 
 interface ProductDetailAddToCartBtnProps {
     quantity: number
@@ -19,8 +21,16 @@ function ProductDetailAddToCartBtn({ quantity, product }: ProductDetailAddToCart
     const dispatch = useCartDispatch()
     const totalPrice = product.price * quantity
 
-    const handleClick = () => 
-        dispatch({ type: "ADD_ITEM", payload: {...product, quantity}})
+    const handleClick = () => {
+        const messenger = dispatchCartIframe({
+            targetWindow: window.__MINI_CART_WINDOW__, 
+            targetOrigin: "http://localhost:5174/mini-carrinho"
+        })
+
+        const addItemAction: CartAction = { type: "ADD_ITEM", payload: {...product, quantity}}
+        dispatch(addItemAction)
+        messenger(addItemAction)
+    }
 
     return (
         <div className="product-detail__add-to-cart__btn">
