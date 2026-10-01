@@ -3,7 +3,7 @@ import { createRootRoute, createRoute, createRouter, lazyRouteComponent, Outlet 
 
 export const rootRoute = createRootRoute({
   component: () => {
-    useCartIframeListener({senderOrigin: 'http://localhost:5173'})
+    useCartIframeListener({senderOrigin: `${import.meta.env.VITE_CHECKOUT_ORIGIN}`})
     return <Outlet />
   }, 
 })

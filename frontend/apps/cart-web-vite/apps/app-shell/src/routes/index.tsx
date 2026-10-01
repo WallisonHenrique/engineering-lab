@@ -8,11 +8,11 @@ import { Outlet } from "@tanstack/react-router";
 
 const MENU_ITEMS: MenuItemModel[] = [
     ...catalogMenuItems,
-    {label: 'Carrinho', path: 'http://localhost:5173/carrinho'},
+    {label: 'Carrinho', path: `${import.meta.env.VITE_CHECKOUT_ORIGIN}/carrinho`},
 ];
 
 sharedRootRoute.options.component = () => {
-  useCartIframeListener({senderOrigin: 'http://localhost:5173'})
+  useCartIframeListener({senderOrigin: import.meta.env.VITE_CHECKOUT_ORIGIN})
 
   return (
     <MainLayout menuItems={MENU_ITEMS}>

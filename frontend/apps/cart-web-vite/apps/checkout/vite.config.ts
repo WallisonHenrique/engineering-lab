@@ -6,6 +6,10 @@ export default defineConfig({
     react()
   ],
   base: '/carrinho',
+  preview: {
+    port: 4174,
+    strictPort: true,
+  },
   server: {
     port: 5174,
     cors: true,

@@ -3,7 +3,6 @@ import "./ProductDetailScreen.css"
 import { useState } from "react"
 import { TotalPrice } from "@cart-web-vite/shared/components/TotalPrice"
 import { Button } from "@cart-web-vite/ui/Button"
-import { Link } from "@tanstack/react-router"
 import NumberField from "@cart-web-vite/ui/NumberField"
 import { useCart, useCartDispatch, useCartTotalPrice } from "@cart-web-vite/shared/hooks/use-cart"
 import { useParams } from "@tanstack/react-router"
@@ -24,7 +23,7 @@ function ProductDetailAddToCartBtn({ quantity, product }: ProductDetailAddToCart
     const handleClick = () => {
         const messenger = dispatchCartIframe({
             targetWindow: window.__MINI_CART_WINDOW__, 
-            targetOrigin: "http://localhost:5173/mini-carrinho"
+            targetOrigin: `${import.meta.env.VITE_CHECKOUT_ORIGIN}/mini-carrinho`
         })
 
         const addItemAction: CartAction = { type: "ADD_ITEM", payload: {...product, quantity}}
@@ -66,9 +65,9 @@ function ProductDetailViewCart() {
                 <TotalPrice value={total} />
             </div>
             <div className="product-detail__view-cart__btn">
-                <Link to="/carrinho">
+                <a href="/carrinho">
                     <Button>Ver Carrinho</Button>
-                </Link>
+                </a>
             </div>
         </div>
     )

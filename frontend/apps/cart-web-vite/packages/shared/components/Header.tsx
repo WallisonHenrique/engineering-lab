@@ -29,7 +29,7 @@ function HeaderMiniCartDropdown({open}: {open: boolean}) {
         <div className="header__mini-cart__dropdown">
             <iframe
                 ref={iframeRef}
-                src="http://localhost:5173/mini-carrinho"
+                src={`${window.location.origin}/mini-carrinho`}
                 width={440} 
                 height={464}
                 style={{display: open ? 'block' : 'none'}}

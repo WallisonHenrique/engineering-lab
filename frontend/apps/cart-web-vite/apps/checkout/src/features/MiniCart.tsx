@@ -7,7 +7,7 @@ import { dispatchCartIframe } from '@cart-web-vite/shared/utils/helpers'
 function MiniCartContent() {
     const target = {
         getTargetWindow: () => window.parent,
-        targetOrigin: 'http://localhost:5173'
+        targetOrigin: `${import.meta.env.VITE_CHECKOUT_ORIGIN}`
     }
 
     const handleClick = () => {
