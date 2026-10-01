@@ -1,10 +1,14 @@
+import { useCartIframeListener } from "@cart-web-vite/shared/hooks/use-cart-iframe";
 import { createRootRoute, createRoute, createRouter, lazyRouteComponent, Outlet } from "@tanstack/react-router";
 
 export const rootRoute = createRootRoute({
-  component: () => <Outlet />, 
+  component: () => {
+    useCartIframeListener({senderOrigin: 'http://localhost:5173'})
+    return <Outlet />
+  }, 
 })
 
-export const cartRoute = createRoute({
+const cartRoute = createRoute({
     getParentRoute: () => rootRoute,
     path: '/carrinho',
     component: lazyRouteComponent(() => import('../features/CartScreen').then((m) => ({ default: m.CartScreen })))
