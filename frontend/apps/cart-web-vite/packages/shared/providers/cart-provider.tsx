@@ -1,5 +1,5 @@
 import { CartContext, CartDispatchContext, type CartAction, type CartState } from "@cart-web-vite/shared/contexts/cart-contexts";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 const initialCartState = {
     byId: {},
@@ -7,7 +7,11 @@ const initialCartState = {
 }
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-    const [cart, dispatch] = useReducer(cartReducer, initialCartState)
+    const [cart, dispatch] = useReducer(cartReducer, initialCartState, initCart)
+
+    useEffect(() => {
+        localStorage.setItem('@cart-web-vite/cart', JSON.stringify(cart))
+    },[cart])
 
     const cartContextValue = {...cart}
 
@@ -50,5 +54,14 @@ function cartReducer(cart: CartState, action: CartAction) {
         default: {
             throw Error('Unknow action')
         }
+    }
+}
+
+function initCart(initialFallback: CartState) {
+    try {
+        const start = localStorage.getItem("@cart-web-vite/cart")
+        return start ? JSON.parse(start) : initialFallback
+    } catch {
+        return initialFallback
     }
 }
