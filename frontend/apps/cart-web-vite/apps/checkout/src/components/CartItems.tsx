@@ -7,22 +7,29 @@ import { memo } from "react"
 import { dispatchCartIframe, type DispatchCartIframe } from "@cart-web-vite/shared/utils/helpers"
 import type { CartAction } from "@cart-web-vite/shared/contexts/cart-contexts"
 
+interface DispatchCartIframeActions extends Omit<DispatchCartIframe, 'targetWindow'> {
+    getTargetWindow: () => DispatchCartIframe['targetWindow'];
+}
+
 interface CartQuantyControlProps {
     item: CartItemModel
-    target: DispatchCartIframe
+    target: DispatchCartIframeActions
 }
 
 interface CartItemProps {
     item: CartItemModel
     size?: SizeType
-    target: DispatchCartIframe
+    target: DispatchCartIframeActions
 }
 
 export function CartQuantityControl({ item, target }: CartQuantyControlProps) {
     const dispatch = useCartDispatch()
 
     const handleChange = (value: number) => {
-        const messenger = dispatchCartIframe(target)
+        const messenger = dispatchCartIframe({
+            ...target,
+            targetWindow: target.getTargetWindow()
+        })
 
         if (value === 0) {
             const removeItemAction: CartAction = {type: "REMOVE_ITEM", id: item.id}
@@ -30,7 +37,6 @@ export function CartQuantityControl({ item, target }: CartQuantyControlProps) {
             messenger(removeItemAction)
             return
         }
-
         const changeQuantityAction: CartAction = {
             type: "CHANGE_QUANTITY", 
             id: item.id, 
@@ -62,7 +68,7 @@ export const CartItem = memo(({ item, size, target }: CartItemProps) => (
     </div>
 ))
 
-export function CartItems({ size, target }: { size?: SizeType, target: DispatchCartIframe}) {
+export function CartItems({ size, target }: { size?: SizeType, target: DispatchCartIframeActions}) {
     const cart = useCart()
 
     return (

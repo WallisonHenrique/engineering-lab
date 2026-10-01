@@ -9,7 +9,7 @@ const MENU_ITEMS = [
 
 export function CartScreen() {
     const target = {
-        targetWindow: window.__MINI_CART_WINDOW__,
+        getTargetWindow: () => window.__MINI_CART_WINDOW__,
         targetOrigin: 'http://localhost:5173/mini-carrinho'
     }
 
