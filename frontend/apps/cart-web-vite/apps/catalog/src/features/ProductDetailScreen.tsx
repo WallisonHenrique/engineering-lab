@@ -24,7 +24,7 @@ function ProductDetailAddToCartBtn({ quantity, product }: ProductDetailAddToCart
     const handleClick = () => {
         const messenger = dispatchCartIframe({
             targetWindow: window.__MINI_CART_WINDOW__, 
-            targetOrigin: "http://localhost:5174/mini-carrinho"
+            targetOrigin: "http://localhost:5173/mini-carrinho"
         })
 
         const addItemAction: CartAction = { type: "ADD_ITEM", payload: {...product, quantity}}

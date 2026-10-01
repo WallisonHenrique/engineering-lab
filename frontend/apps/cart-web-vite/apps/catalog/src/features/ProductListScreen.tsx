@@ -21,7 +21,7 @@ const ProductListControl = memo(({ item, product }: ProductListControlProps) => 
     const handleChange = (value: number) => {
         const messenger = dispatchCartIframe({
             targetWindow: window.__MINI_CART_WINDOW__, 
-            targetOrigin: "http://localhost:5174/mini-carrinho"
+            targetOrigin: "http://localhost:5173/mini-carrinho"
         })
 
         if (!item) {

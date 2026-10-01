@@ -1,19 +1,12 @@
 import { Link } from "@tanstack/react-router"
 import "./Menu.css"
 import type { MenuItemModel } from "@cart-web-vite/shared/types/menu-types";
-import { catalogMenuItems } from '@cart-web-vite/catalog/menu'
-import { checkoutMenuItems } from '@cart-web-vite/checkout/menu'
 
-const navigationMenu: MenuItemModel[] = [
-    ...catalogMenuItems,
-    ...checkoutMenuItems
-];
-
-function Menu() {
+function Menu({ items }: { items: MenuItemModel[]}) {
     return (
         <nav className="menu">
-            {navigationMenu.map(i => (
-                i.path === '/carrinho'
+            {items.map(i => (
+                i.path.includes('http://')
                     ? <a key={i.path} className="menu-link" href={i.path}>{i.label}</a>
                     : <Link key={i.path} className="menu-link" to={i.path}>{i.label}</Link>
             ))}

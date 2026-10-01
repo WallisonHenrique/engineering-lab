@@ -1,7 +1,6 @@
 import './Header.css';
-import Menu from '@/components/Menu';
 import { useCartTotalItems } from '@cart-web-vite/shared/hooks/use-cart';
-import { useEffect, useRef, useState } from 'react';
+import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 
 function HeaderMiniCartButton({ onClick }: { onClick: () => void }) {
     const total = useCartTotalItems()
@@ -30,7 +29,7 @@ function HeaderMiniCartDropdown({open}: {open: boolean}) {
         <div className="header__mini-cart__dropdown">
             <iframe
                 ref={iframeRef}
-                src="http://localhost:5174/mini-carrinho"
+                src="http://localhost:5173/mini-carrinho"
                 width={440} 
                 height={464}
                 style={{display: open ? 'block' : 'none'}}
@@ -51,11 +50,11 @@ function HeaderMiniCart() {
     )
 }
 
-export function Header() {
+export function Header({children}: PropsWithChildren) {
     return (
         <header className='header'>
             <div className="header__left">
-                <Menu />
+                {children}
             </div>
             <div className='header__right'>
                 <HeaderMiniCart />
