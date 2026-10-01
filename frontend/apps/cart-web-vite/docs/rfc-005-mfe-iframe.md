@@ -1,4 +1,4 @@
-# RFC 002: Transição para Monorepo sem Ferramenta
+# RFC 005: Transição para Micro Frontend Horizontal com Iframe
 
 * **Status: Implementada.**
 * **Data:** 30-09-2026
@@ -6,7 +6,7 @@
 ---
 
 ### 1. Objetivo / Problema
-* Refatorar a aplicação atual `cart-web-vite` de um Monorepo com Turborepo para Micro frontend no `mini-cart`.
+* Refatorar a aplicação atual `cart-web-vite` de um Monorepo com Turborepo para Micro frontend horizontal com iframe no `mini-cart`.
 * **Objetivo:** Permitir deploys independentes do `mini-cart` e integrar ao app-shell em tempo de execução via iframe.
 
 ### 2. Solução Proposta (Arquitetura e Contratos)
