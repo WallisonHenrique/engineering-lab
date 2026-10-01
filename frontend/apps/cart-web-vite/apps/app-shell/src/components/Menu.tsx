@@ -12,7 +12,11 @@ const navigationMenu: MenuItemModel[] = [
 function Menu() {
     return (
         <nav className="menu">
-            {navigationMenu.map(i => <Link key={i.path} className="menu-link" to={i.path}>{i.label}</Link>)}
+            {navigationMenu.map(i => (
+                i.path === '/carrinho'
+                    ? <a key={i.path} className="menu-link" href={i.path}>{i.label}</a>
+                    : <Link key={i.path} className="menu-link" to={i.path}>{i.label}</Link>
+            ))}
         </nav>
     )
 }
