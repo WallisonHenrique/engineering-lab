@@ -8,10 +8,10 @@ export default createModuleFederationConfig({
     './ProductListScreen': './src/features/ProductListScreen.tsx',
   },
   shared: {
-    react: { singleton: true, eager: true, },
-    'react/': { singleton: true, eager: true, },
-    'react-dom': { singleton: true, eager: true, },
-    '@tanstack/react-router': { singleton: true, eager: true, },
+    react: { singleton: true },
+    'react/': { singleton: true },
+    'react-dom': { singleton: true },
+    '@tanstack/react-router': { singleton: true },
     '@cart-web-vite/shared/hooks/use-cart': { singleton: true }
   },
   dts: {
