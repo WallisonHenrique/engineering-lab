@@ -1,15 +1,21 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import path from 'path'
+import { federation } from '@module-federation/vite'
+import mfConfig from './module-federation.config.ts'
 
 export default defineConfig({
     plugins: [
-      react()
+      react(),
+      federation(mfConfig)
     ],
     resolve: {
       alias: {
         '@': path.resolve(import.meta.dirname, './src'),
       },
+    },
+    build: {
+      target: 'chrome89',
     },
     preview: {
       port: 4173,

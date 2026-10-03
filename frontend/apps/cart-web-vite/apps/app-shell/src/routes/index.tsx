@@ -1,15 +1,16 @@
-import { catalogMenuItems } from "@cart-web-vite/catalog/menu";
+import { MENU_ITEMS } from "@/routes/menu-items";
 import { catalogRoutes } from "@cart-web-vite/catalog/routes";
 import MainLayout from "@cart-web-vite/shared/components/MainLayout";
 import { useCartIframeListener } from "@cart-web-vite/shared/hooks/use-cart-iframe";
 import { createRoutes, sharedRootRoute } from "@cart-web-vite/shared/routes/routes";
-import type { MenuItemModel } from "@cart-web-vite/shared/types/menu-types";
-import { Outlet } from "@tanstack/react-router";
+import { createRoute, lazyRouteComponent, Outlet } from "@tanstack/react-router";
 
-const MENU_ITEMS: MenuItemModel[] = [
-    ...catalogMenuItems,
-    {label: 'Carrinho', path: `${import.meta.env.VITE_CHECKOUT_ORIGIN}/carrinho`},
-];
+const productListRemoteRoute = createRoute({
+  getParentRoute: () => catalogRoutes,
+  path: '/',
+  component: lazyRouteComponent(() => import('productList/ProductListScreen').then(m => ({ default: m.ProductListScreen }))),
+  errorComponent: ({ error }: {error: any}) => <div>{error.message}</div>
+});
 
 sharedRootRoute.options.component = () => {
   useCartIframeListener({senderOrigin: import.meta.env.VITE_CHECKOUT_ORIGIN})
@@ -23,12 +24,7 @@ sharedRootRoute.options.component = () => {
 
 export const router = createRoutes({ 
   routes: [
-    catalogRoutes
+    catalogRoutes,
+    productListRemoteRoute
   ]
 })
-
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router
-  }
-}

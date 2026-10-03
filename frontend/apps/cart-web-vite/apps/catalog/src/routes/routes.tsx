@@ -7,12 +7,6 @@ export const catalogBaseRoute = createRoute({
   component: () => <Outlet />,
 });
 
-export const productListRoute = createRoute({
-  getParentRoute: () => catalogBaseRoute,
-  path: '/',
-  component: lazyRouteComponent(() => import('../features/ProductListScreen').then(m => ({ default: m.ProductListScreen }))),
-});
-
 export const productDetailRoute = createRoute({
   getParentRoute: () => catalogBaseRoute,
   path: '/produto/$id',
@@ -20,6 +14,5 @@ export const productDetailRoute = createRoute({
 });
 
 export const catalogRoutes = catalogBaseRoute.addChildren([
-  productListRoute,
   productDetailRoute
 ]);
