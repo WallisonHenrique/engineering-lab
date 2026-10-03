@@ -1,7 +1,7 @@
 # RFC 006: Transição para Micro Frontend via Proxy
 
-* **Status: Implementada.**
-* **Data:** 30-09-2026
+* **Status: Implementada.** O fluxo base foi concluído. A evolução do projeto segue na [RFC 007](./rfc-007-mfe-module-federation.md).
+* **Data:** 01-10-2026
 
 ---
 

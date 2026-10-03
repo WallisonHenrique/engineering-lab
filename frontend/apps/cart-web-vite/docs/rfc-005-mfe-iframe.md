@@ -1,6 +1,6 @@
 # RFC 005: Transição para Micro Frontend Horizontal com Iframe
 
-* **Status: Implementada.** O fluxo base foi concluído. A evolução do projeto segue na [RFC 006](./rfc-006-mfe-proxy-.md).
+* **Status: Implementada.** O fluxo base foi concluído. A evolução do projeto segue na [RFC 006](./rfc-006-mfe-proxy.md).
 * **Data:** 30-09-2026
 
 ---
