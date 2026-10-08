@@ -1,11 +1,12 @@
 import { createModuleFederationConfig } from '@module-federation/vite';
 
 export default createModuleFederationConfig({
-  name: 'productList',
+  name: 'catalog',
   manifest: true,
   filename: 'remoteEntry.js',
   exposes: {
     './ProductListScreen': './src/features/ProductListScreen.tsx',
+    './ProductDetailScreen': './src/features/ProductDetailScreen.tsx',
   },
   shared: {
     react: { singleton: true, import: false },

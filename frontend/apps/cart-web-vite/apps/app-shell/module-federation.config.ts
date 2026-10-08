@@ -1,14 +1,14 @@
 import { createModuleFederationConfig } from '@module-federation/vite';
 
 export default createModuleFederationConfig({
-  name: 'host_app',
+  name: 'app-shell',
   manifest: true,
   remotes: {
-    productList: {
+    catalog: {
       type: 'module',
-      name: 'productList',
+      name: 'catalog',
       entry: 'http://localhost:4175/remoteEntry.js',
-    },
+    }
   },
   shared: {
     react: { singleton: true, eager: true,  },

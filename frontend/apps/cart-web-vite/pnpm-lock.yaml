@@ -213,9 +213,6 @@ importers:
 
   apps/app-shell:
     dependencies:
-      '@cart-web-vite/catalog':
-        specifier: workspace:*
-        version: link:../catalog
       '@cart-web-vite/shared':
         specifier: workspace:*
         version: link:../../packages/shared

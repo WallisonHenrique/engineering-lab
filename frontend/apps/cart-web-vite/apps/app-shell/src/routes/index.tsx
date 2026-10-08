@@ -1,30 +1,39 @@
 import { MENU_ITEMS } from "@/routes/menu-items";
-import { catalogRoutes } from "@cart-web-vite/catalog/routes";
 import MainLayout from "@cart-web-vite/shared/components/MainLayout";
 import { useCartIframeListener } from "@cart-web-vite/shared/hooks/use-cart-iframe";
-import { createRoutes, sharedRootRoute } from "@cart-web-vite/shared/routes/routes";
-import { createRoute, lazyRouteComponent, Outlet } from "@tanstack/react-router";
+import { createRootRoute, createRoute, createRouter, lazyRouteComponent, Outlet } from "@tanstack/react-router";
 
-const productListRemoteRoute = createRoute({
-  getParentRoute: () => catalogRoutes,
-  path: '/',
-  component: lazyRouteComponent(() => import('productList/ProductListScreen').then(m => ({ default: m.ProductListScreen }))),
-  errorComponent: ({ error }: {error: any}) => <div>{error.message}</div>
-});
-
-sharedRootRoute.options.component = () => {
-  useCartIframeListener({senderOrigin: import.meta.env.VITE_CHECKOUT_ORIGIN})
+function RootLayout() {
+  useCartIframeListener({ senderOrigin: import.meta.env.VITE_CHECKOUT_ORIGIN });
 
   return (
     <MainLayout menuItems={MENU_ITEMS}>
-      <Outlet /> 
+      <Outlet />
     </MainLayout>
-  )
+  );
 }
 
-export const router = createRoutes({ 
-  routes: [
-    catalogRoutes,
-    productListRemoteRoute
-  ]
-})
+const rootRoute = createRootRoute({
+  component: RootLayout,
+});
+
+const productListRemoteRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/',
+  component: lazyRouteComponent(() => import('catalog/ProductListScreen').then((m) => ({ default: m.ProductListScreen }))),
+  errorComponent: ({ error }: { error: any }) => <div>{error.message}</div>,
+});
+
+const productDetailRemoteRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/produto/$id',
+  component: lazyRouteComponent(() => import('catalog/ProductDetailScreen').then((m) => ({ default: m.ProductDetailScreen }))),
+  errorComponent: ({ error }: { error: any }) => <div>{error.message}</div>,
+});
+
+const routeTree = rootRoute.addChildren([
+  productListRemoteRoute,
+  productDetailRemoteRoute,
+]);
+
+export const router = createRouter({ routeTree });

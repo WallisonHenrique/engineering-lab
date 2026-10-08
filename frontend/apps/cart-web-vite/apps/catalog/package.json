@@ -29,10 +29,5 @@
     "oxlint": "^1.79.0",
     "typescript": "~6.0.2",
     "vite": "^8.2.2"
-  },
-  "exports": {
-    "./features/*": "./src/features/*.tsx",
-    "./menu": "./src/routes/menu.ts",
-    "./routes": "./src/routes/routes.tsx"
   }
 }

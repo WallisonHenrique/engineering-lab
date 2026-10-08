@@ -12,7 +12,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@cart-web-vite/catalog": "workspace:*",
     "@cart-web-vite/shared": "workspace:*",
     "@module-federation/vite": "^1.23.0",
     "@tanstack/react-router": "^1.170.32",

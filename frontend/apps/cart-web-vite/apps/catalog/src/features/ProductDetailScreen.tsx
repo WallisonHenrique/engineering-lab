@@ -99,7 +99,7 @@ function ProductDetailItem({ product }: { product: ProductModel }) {
 }
 
 export function ProductDetailScreen() {
-    const { id } = useParams({ from: '/catalog-layout/produto/$id' }); 
+    const { id } = useParams({ from: '/produto/$id' }); 
     const { product } = useProduct({ id });
 
     if (!product) return <div>Produto não encontrado!</div>
