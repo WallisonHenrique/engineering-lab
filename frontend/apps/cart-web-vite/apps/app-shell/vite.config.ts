@@ -21,11 +21,6 @@ export default defineConfig({
       port: 4173,
       strictPort: true,
       proxy: {
-        '/carrinho': {
-          target: 'http://localhost:4174',
-          changeOrigin: true,
-          ws: true,
-        },
         '/mini-carrinho': {
           target: 'http://localhost:4174',
           changeOrigin: true,
@@ -37,18 +32,5 @@ export default defineConfig({
     server: {
       port: 5173,
       strictPort: true,
-      proxy: {
-        '/carrinho': {
-          target: 'http://localhost:5174',
-          changeOrigin: true,
-          ws: true,
-        },
-        '/mini-carrinho': {
-          target: 'http://localhost:5174',
-          changeOrigin: true,
-          ws: true,
-          rewrite: (path) => path.replace(/^\/mini-carrinho/, '/carrinho'),
-        },
-      },
     },
   })

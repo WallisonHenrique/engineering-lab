@@ -1,20 +1,16 @@
+import { federation } from '@module-federation/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
+import mfConfig from './module-federation.config.ts'
 
 export default defineConfig({
   plugins: [
-    react()
+    react(),
+    federation(mfConfig),
   ],
   base: '/carrinho',
   preview: {
     port: 4174,
     strictPort: true,
-  },
-  server: {
-    port: 5174,
-    cors: true,
-    hmr: {
-      port: 5175,
-    },
-  },
+  }
 })

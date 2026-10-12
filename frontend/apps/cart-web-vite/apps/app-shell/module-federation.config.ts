@@ -8,6 +8,11 @@ export default createModuleFederationConfig({
       type: 'module',
       name: 'catalog',
       entry: 'http://localhost:4175/remoteEntry.js',
+    },
+    checkout: {
+      type: 'module',
+      name: 'checkout',
+      entry: 'http://localhost:4174/carrinho/remoteEntry.js',
     }
   },
   shared: {

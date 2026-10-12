@@ -31,9 +31,17 @@ const productDetailRemoteRoute = createRoute({
   errorComponent: ({ error }: { error: any }) => <div>{error.message}</div>,
 });
 
+const cartRemoteRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/carrinho',
+  component: lazyRouteComponent(() => import('checkout/CartScreen').then((m) => ({ default: m.CartScreen }))),
+  errorComponent: ({ error }: { error: any }) => <div>{error.message}</div>,
+});
+
 const routeTree = rootRoute.addChildren([
   productListRemoteRoute,
   productDetailRemoteRoute,
+  cartRemoteRoute
 ]);
 
 export const router = createRouter({ routeTree });
