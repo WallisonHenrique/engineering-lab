@@ -1,10 +1,21 @@
 {
-  "name": "engineering-lab",
-  "version": "1.0.0",
+  "name": "cart-web-vite",
   "private": true,
   "scripts": {
-    "dev:cart": "pnpm --filter cart dev",
-    "dev:api": "pnpm --filter cart-api dev",
-    "dev": "pnpm --parallel --filter cart --filter ecommerce-api dev"
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "lint": "turbo lint",
+    "preview": "turbo preview",
+    "boundaries": "turbo boundaries"
+  },
+  "devDependencies": {
+    "turbo": "^2.11.4"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.25.0"
+    }
   }
 }
