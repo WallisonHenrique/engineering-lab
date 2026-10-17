@@ -10,15 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '11.25.0'
       - uses: actions/setup-node@v4
         with:
           node-version: '24.20.0'
-      - run: npm ci
-      - run: npm run build
+          # cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm turbo run build --filter=@cart-web-vite/app-shell
       - uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: dist/
+          path: apps/app-shell/dist/
 
   deploy:
     runs-on: ubuntu-latest
