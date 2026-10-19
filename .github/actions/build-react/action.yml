@@ -1,0 +1,44 @@
+name: Build React
+description: Installs dependencies with pnpm cache, build a React application and upload dist artifact.
+
+inputs:
+  pnpm-version:
+    description: 'pnpm version to setup'
+    required: false
+    default: '11.25.0'
+  node-version:
+    description: 'Node.js version to build'
+    required: false
+    default: '24.20.0'
+  artifact-name:
+    description: 'Name of the artifact to build upload'
+    required: false
+    default: 'dist'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: ${{ inputs.pnpm-version }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        cache: 'pnpm'
+        node-version: ${{ inputs.node-version }}
+        
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      shell: bash
+
+    - name: Build application
+      run: pnpm turbo run build --filter=@cart-web-vite/app-shell
+      shell: bash
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: apps/app-shell/dist/
