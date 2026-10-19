@@ -1,21 +1,23 @@
 # RFC 007: Transição para Micro Frontend via Module Federation
 
-* **Status: Implementada.**
+* **Status: Implementada.** O fluxo base foi concluído. A evolução do projeto segue na [RFC 008](./rfc-008-poc-ci-cd.md).
 * **Data:** 03-10-2026
 
 ---
 
 ### 1. Objetivo / Problema
-* Refatorar `ProductList` da aplicação `cart-web-vite` para Micro Frontend usando Module Federation.
-* **Objetivo:** Permitir compartilhamento de código do `ProducList` em tempo de execução.
+* Implantar a aplicação no bucket da AWS S3 com rotinas automatizadas.
+* **Objetivo:** Usar CI/CD com GitHub Actions, workflows, jobs e actions para publicar a aplicação no bucket da AWS S3 ao enviar o código para a branch `main`. Link com descrição: [Acessar aplicação publicada](https://d110jenfqnqifl.cloudfront.net/).
 
 ### 2. Solução Proposta (Arquitetura e Contratos)
-* **Estratégia de composição:**
-  O `ProductList` é servido em outra porta e composto na app-shell via Module Federation, ou seja `ProductList` é remote e `app-shell` é o host.
+* **PoC:**
+  Objetivo é o fluxo mínimo funcional e automatizado usando secrets da AWS. Foi publicado somente a app-shell para validar o fluxo de CI/CD.
 
-* **Estratégia de comunicação:** A comunicação permanece via Context API entre `app-shell` e `produc-list`.
+* **CloudFront:** A aplicação é servida via CDN para evitar acessar diretamente o bucket e reduzir a latência de rede para o usuário.
 
 ### 3. Decisões e Aprendizados
-* **Única instância:** Para que o `ProductList` tenha acesso ao Contexto criado na `app-shell` é necessário definir as dependências do React e `use-cart-hook` como singleton (única instância).
+* **Escolher actions do Github:** Para encontrar actions basta utilizar o site Marketplace do Github e para escolher as ações corretamente deve tratá-las como dependências de terceiros tomando os devidos cuidados.
 
-* **App-shell fornece dependência:** Como a `app-shell` fornece as mesmas dependências que o `product-list` precisa não é necessário importar novamente no remote.
+* **Cache:** Utilizar cache para pula a etapa de instalação quando não há mudançã no package.lock.
+
+* **Versões estáticas:** Para evitar instalações indevidas que causem bugs no lock file utilizar versões estáticas e específicas.
