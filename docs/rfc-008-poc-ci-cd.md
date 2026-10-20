@@ -1,6 +1,6 @@
 # RFC 008: Adicionar PoC CI/CD com Github Actions
 
-* **Status: Implementada.**
+* **Status: Implementada.** O fluxo base foi concluído. A evolução do projeto segue na [RFC 009](./rfc-009-reusable-actios.md).
 * **Data:** 18-10-2026
 
 ---
