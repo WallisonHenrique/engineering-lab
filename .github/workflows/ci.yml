@@ -5,5 +5,5 @@ on:
     branches: [main]
 
 jobs:
-  ci:
+  CI:
     uses: ./.github/workflows/_build.yml
