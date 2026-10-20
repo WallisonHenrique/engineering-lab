@@ -1,0 +1,44 @@
+name: Build (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      pnpm-version:
+        description: 'pnpm version to setup'
+        required: false
+        default: '11.25.0'
+        type: string
+      node-version:
+        description: 'Node.js version to build'
+        required: false
+        default: '24.20.0'
+        type: string
+      artifact-name:
+        description: 'Name of the artifact to build upload'
+        required: false
+        default: 'dist'
+        type: string
+    outputs:
+      artifact-name:
+        description: Name of the artifact produced by the build job.
+        value: ${{ jobs.build.outputs.artifact-name }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-name: ${{ steps.echo.outputs.artifact-name }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build React
+        uses: ./.github/actions/build-react
+        with:
+          pnpm-version: ${{ inputs.pnpm-version }}
+          node-version: ${{ inputs.node-version }}
+          artifact-name: ${{ inputs.artifact-name }}
+    
+      - name: Echo artifact name
+        id: echo
+        run: echo "artifact-name=${{ inputs.artifact-name }}" >> "$GITHUB_OUTPUT"

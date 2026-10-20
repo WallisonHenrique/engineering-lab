@@ -7,11 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build React
-        uses: ./.github/actions/build-react
+    uses: ./.github/workflows/_build.yml
 
   deploy:
     runs-on: ubuntu-latest
