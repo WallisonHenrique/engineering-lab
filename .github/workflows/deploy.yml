@@ -7,7 +7,7 @@ on:
 
 concurrency:
   group: production-deploy
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions: {}
 
@@ -29,8 +29,9 @@ jobs:
         with:
           name: dist
           path: dist/
-      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+      - uses: aws-actions/configure-aws-credentials@ec61189d14ec14c8efccab744f656cffd0e33f37 # v6.1.0
         with:
           role-to-assume: arn:aws:iam::769814227579:role/wallison-github-actions
           aws-region: sa-east-1
       - run: aws s3 sync dist/ s3://engineering-lab-assets --delete
+      - run: aws cloudfront create-invalidation --distribution-id E3C9NCEXREVQUQ --paths "/*"
