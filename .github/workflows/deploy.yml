@@ -31,6 +31,6 @@ jobs:
           path: dist/
       - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
         with:
-          role-to-assume: arn:aws:iam::769814227579:role/engineering-lab-cicd-service
+          role-to-assume: arn:aws:iam::769814227579:role/wallison-github-actions
           aws-region: sa-east-1
       - run: aws s3 sync dist/ s3://engineering-lab-assets --delete
