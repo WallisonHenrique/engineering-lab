@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "dependencies": {
-    
-  },
   "devDependencies": {
     "@types/node": "24.13.3",
     "@vitejs/plugin-react": "6.1.0",
@@ -13,5 +10,8 @@
   },
   "engines": {
     "node": "24.20.0"
+  },
+  "exports": {
+    "./prettier": "./src/.prettierrc"
   }
 }
