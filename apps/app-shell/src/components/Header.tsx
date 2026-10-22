@@ -1,7 +1,12 @@
 import { useCartTotalItems } from "@cart-web-vite/shared/hooks/use-cart";
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import type { PropsWithChildren } from "react";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import "./Header.css";
+
+const MiniCartRemote = lazy(() =>
+  import("checkout/MiniCart").then((m) => ({ default: m.MiniCart })),
+);
 
 function HeaderMiniCartButton({ onClick }: { onClick: () => void }) {
   const total = useCartTotalItems();
@@ -14,28 +19,14 @@ function HeaderMiniCartButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-function HeaderMiniCartDropdown({ open }: { open: boolean }) {
-  const iframeRef = useRef<HTMLIFrameElement | null>(null);
-  const handleOnLoad = () => {
-    window.__MINI_CART_WINDOW__ = iframeRef?.current?.contentWindow;
-  };
-
-  useEffect(() => {
-    return () => {
-      window.__MINI_CART_WINDOW__ = undefined;
-    };
-  }, []);
-
+function HeaderMiniCartDropdown() {
   return (
     <div className="header__mini-cart__dropdown">
-      <iframe
-        ref={iframeRef}
-        src={`${window.location.origin}/mini-carrinho`}
-        width={440}
-        height={464}
-        style={{ display: open ? "block" : "none" }}
-        onLoad={handleOnLoad}
-      />
+      <ErrorBoundary fallback={<div>Erro ao carregar o mini carrinho</div>}>
+        <Suspense fallback={<div>Carregando mini carrinho...</div>}>
+          <MiniCartRemote />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 }
@@ -46,7 +37,7 @@ function HeaderMiniCart() {
   return (
     <div className="header__mini-cart">
       <HeaderMiniCartButton onClick={() => setOpen((prev) => !prev)} />
-      <HeaderMiniCartDropdown open={open} />
+      {open && <HeaderMiniCartDropdown />}
     </div>
   );
 }

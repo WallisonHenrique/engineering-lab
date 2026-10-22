@@ -5,3 +5,4 @@ interface Window {
 declare module "catalog/ProductListScreen";
 declare module "catalog/ProductDetailScreen";
 declare module "checkout/CartScreen";
+declare module "checkout/MiniCart";

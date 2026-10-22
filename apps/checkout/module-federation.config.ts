@@ -1,17 +1,21 @@
-import { createModuleFederationConfig } from '@module-federation/vite';
+import { createModuleFederationConfig } from "@module-federation/vite";
 
 export default createModuleFederationConfig({
-  name: 'checkout',
+  name: "checkout",
   manifest: true,
-  filename: 'remoteEntry.js',
+  filename: "remoteEntry.js",
   exposes: {
-    './CartScreen': './src/features/CartScreen.tsx',
+    "./CartScreen": "./src/features/CartScreen.tsx",
+    "./MiniCart": "./src/features/MiniCart.tsx",
   },
   shared: {
-    react: { singleton: true, import: false, eager: true },
-    'react/': { singleton: true, import: false, eager: true },
-    'react-dom': { singleton: true, import: false, eager: true },
-    '@tanstack/react-router': { singleton: true, import: false, eager: true },
-    '@cart-web-vite/shared/hooks/use-cart': { singleton: true, import: false, eager: true }
+    react: { singleton: true, import: false },
+    "react/": { singleton: true, import: false },
+    "react-dom": { singleton: true, import: false },
+    "@tanstack/react-router": { singleton: true, import: false },
+    "@cart-web-vite/shared/hooks/use-cart": {
+      singleton: true,
+      import: false,
+    },
   },
 });

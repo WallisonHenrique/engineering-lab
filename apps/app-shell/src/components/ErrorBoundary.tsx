@@ -1,6 +1,6 @@
 import React from "react";
 
-type Props = React.PropsWithChildren<{}>;
+type Props = React.PropsWithChildren<{ fallback?: React.ReactNode }>;
 type State = { hasError: boolean };
 
 class ErrorBoundary extends React.Component<Props, State> {
@@ -16,7 +16,7 @@ class ErrorBoundary extends React.Component<Props, State> {
 
   render() {
     if (this.state.hasError) {
-      return <h1>Sentimos muito por isso.</h1>;
+      return this.props.fallback || <div>Sentimos muito por isso.</div>;
     }
 
     return this.props.children;
