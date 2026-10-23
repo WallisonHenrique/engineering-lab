@@ -1,113 +1,86 @@
-import { ProductCard } from "@cart-web-vite/shared/components/ProductCard"
-import "./ProductDetailScreen.css"
-import { useState } from "react"
-import { TotalPrice } from "@cart-web-vite/shared/components/TotalPrice"
-import { Button } from "@cart-web-vite/ui/Button"
-import NumberField from "@cart-web-vite/ui/NumberField"
-import { useCart, useCartDispatch, useCartTotalPrice } from "@cart-web-vite/shared/hooks/use-cart"
-import { useParams } from "@tanstack/react-router"
-import type { ProductModel } from "../types/product-types"
-import { useProduct } from "../hooks/use-products"
-import { dispatchCartIframe } from "@cart-web-vite/shared/utils/helpers"
-import type { CartAction } from "@cart-web-vite/shared/contexts/cart-contexts"
-
-interface ProductDetailAddToCartBtnProps {
-    quantity: number
-    product: ProductModel
-}
-
-function ProductDetailAddToCartBtn({ quantity, product }: ProductDetailAddToCartBtnProps) {
-    const dispatch = useCartDispatch()
-    const totalPrice = product.price * quantity
-
-    const handleClick = () => {
-        const messenger = dispatchCartIframe({
-            targetWindow: window.__MINI_CART_WINDOW__, 
-            targetOrigin: `${import.meta.env.VITE_CHECKOUT_ORIGIN}/mini-carrinho`
-        })
-
-        const addItemAction: CartAction = { type: "ADD_ITEM", payload: {...product, quantity}}
-        dispatch(addItemAction)
-        messenger(addItemAction)
-    }
-
-    return (
-        <div className="product-detail__add-to-cart__btn">
-            <Button onClick={handleClick}>
-                Adicionar
-                <TotalPrice value={totalPrice} />
-            </Button>
-        </div>
-    )
-}
+import { ProductCard } from "@cart-web-vite/shared/components/ProductCard";
+import "./ProductDetailScreen.css";
+import { useState } from "react";
+import { TotalPrice } from "@cart-web-vite/shared/components/TotalPrice";
+import { Button } from "@cart-web-vite/ui/Button";
+import NumberField from "@cart-web-vite/ui/NumberField";
+import {
+  useCart,
+  useCartTotalPrice,
+} from "@cart-web-vite/shared/hooks/use-cart";
+import { useParams } from "@tanstack/react-router";
+import type { ProductModel } from "../types/product-types";
+import { useProduct } from "../hooks/use-products";
+import { ProductDetailAddToCartBtn } from "./ProductDetailAddToCartBtn";
 
 function ProductDetailAddToCart({ product }: { product: ProductModel }) {
-    const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(1);
 
-    return (
-        <div className="product-detail__add-to-cart">
-            <NumberField 
-                value={quantity} 
-                min={1} 
-                onChange={(value: number) => setQuantity(value)} 
-            />
-            <ProductDetailAddToCartBtn quantity={quantity} product={product} />
-        </div>
-    )
+  return (
+    <div className="product-detail__add-to-cart">
+      <NumberField
+        value={quantity}
+        min={1}
+        onChange={(value: number) => setQuantity(value)}
+      />
+      <ProductDetailAddToCartBtn quantity={quantity} product={product} />
+    </div>
+  );
 }
 
 function ProductDetailViewCart() {
-    const total = useCartTotalPrice()
-    return (
-        <div className="product-detail__view-cart">
-            <div className="product-detail__total-price">
-                Total
-                <TotalPrice value={total} />
-            </div>
-            <div className="product-detail__view-cart__btn">
-                <a href="/carrinho">
-                    <Button>Ver Carrinho</Button>
-                </a>
-            </div>
-        </div>
-    )
+  const total = useCartTotalPrice();
+  return (
+    <div className="product-detail__view-cart">
+      <div className="product-detail__total-price">
+        Total
+        <TotalPrice value={total} />
+      </div>
+      <div className="product-detail__view-cart__btn">
+        <a href="/carrinho">
+          <Button>Ver Carrinho</Button>
+        </a>
+      </div>
+    </div>
+  );
 }
 
 function ProductDetailSummary({ product }: { product: ProductModel }) {
-    const cart = useCart()
-    
-    return (
-        <div className="product-detail__summary">
-            { cart.byId[product.id] 
-                ? <ProductDetailViewCart /> 
-                : <ProductDetailAddToCart product={product} />
-            }
-        </div>
-    )
+  const cart = useCart();
+
+  return (
+    <div className="product-detail__summary">
+      {cart.byId[product.id] ? (
+        <ProductDetailViewCart />
+      ) : (
+        <ProductDetailAddToCart product={product} />
+      )}
+    </div>
+  );
 }
 
 function ProductDetailItem({ product }: { product: ProductModel }) {
-    return (
-        <div className="product-detail__item">
-            <ProductCard>
-                <ProductCard.Image url={product.image} alt={product.name} />
-                <ProductCard.Name name={product.name} />
-                <ProductCard.Price price={product.price} />
-            </ProductCard>
-        </div>
-    )
+  return (
+    <div className="product-detail__item">
+      <ProductCard>
+        <ProductCard.Image url={product.image} alt={product.name} />
+        <ProductCard.Name name={product.name} />
+        <ProductCard.Price price={product.price} />
+      </ProductCard>
+    </div>
+  );
 }
 
 export function ProductDetailScreen() {
-    const { id } = useParams({ from: '/produto/$id' }); 
-    const { product } = useProduct({ id });
+  const { id } = useParams({ from: "/produto/$id" });
+  const { product } = useProduct({ id });
 
-    if (!product) return <div>Produto não encontrado!</div>
-    
-    return (
-        <div className="product-detail">
-            <ProductDetailItem product={product} />
-            <ProductDetailSummary product={product} />
-        </div>
-    )
+  if (!product) return <div>Produto não encontrado!</div>;
+
+  return (
+    <div className="product-detail">
+      <ProductDetailItem product={product} />
+      <ProductDetailSummary product={product} />
+    </div>
+  );
 }
