@@ -3,6 +3,7 @@ import { useCartDispatch } from "@cart-web-vite/shared/hooks/use-cart";
 import type { ProductModel } from "../types/product-types";
 import { Button } from "@cart-web-vite/ui/Button";
 import { TotalPrice } from "@cart-web-vite/shared/components/TotalPrice";
+import { calculateTotalPrice } from "../utils/calculate-total-price";
 
 interface Props {
   quantity: number;
@@ -11,8 +12,7 @@ interface Props {
 
 export function ProductDetailAddToCartBtn({ quantity, product }: Props) {
   const dispatch = useCartDispatch();
-  const totalPrice = product.price * quantity;
-
+  const totalPrice = calculateTotalPrice(product.price, quantity);
   const handleClick = () => {
     const addItemAction: CartAction = {
       type: "ADD_ITEM",
