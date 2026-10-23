@@ -10,7 +10,8 @@
     "lint": "oxlint",
     "lint:arch": "depcruise src --progress --cache",
     "preview": "vite preview",
-    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,css,json,md}\""
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,css,json,md}\"",
+    "test": "vitest"
   },
   "dependencies": {
     "@cart-web-vite/shared": "workspace:*",
@@ -22,14 +23,17 @@
   "devDependencies": {
     "@cart-web-vite/tooling": "workspace:*",
     "@tanstack/router-plugin": "1.168.35",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "24.13.3",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4",
     "@vitejs/plugin-react": "6.1.0",
+    "happy-dom": "^21.0.4",
     "oxlint": "1.79.0",
     "prettier": "3.9.10",
     "typescript": "6.0.2",
-    "vite": "8.2.2"
+    "vite": "8.2.2",
+    "vitest": "^5.0.5"
   },
   "engines": {
     "node": "24.20.0"

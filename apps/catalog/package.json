@@ -9,7 +9,8 @@
     "check-types": "tsc --noEmit",
     "lint": "oxlint",
     "lint:arch": "depcruise src --progress --cache",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "@cart-web-vite/shared": "workspace:*",
@@ -22,13 +23,17 @@
   "devDependencies": {
     "@cart-web-vite/tooling": "workspace:*",
     "@tanstack/router-plugin": "1.168.35",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
     "@types/node": "24.13.3",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4",
     "@vitejs/plugin-react": "6.1.0",
+    "happy-dom": "^21.0.4",
     "oxlint": "1.79.0",
     "typescript": "6.0.2",
-    "vite": "8.2.2"
+    "vite": "8.2.2",
+    "vitest": "^5.0.5"
   },
   "engines": {
     "node": "24.20.0"
