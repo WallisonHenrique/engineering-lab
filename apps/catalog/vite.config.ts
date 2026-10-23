@@ -13,5 +13,11 @@ export default defineConfig({
     environment: "happy-dom",
     globals: true,
     setupFiles: ["./vitest.setup.ts"],
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "json", "html"],
+      include: ["src/**/*"],
+      exclude: ["src/main.tsx", "src/vite-env.d.ts", "**/*.test.tsx"],
+    },
   },
 });
